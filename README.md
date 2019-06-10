@@ -25,8 +25,8 @@ The top and bottom of the screen are designated safe zones where the player char
 
 In addition to enemies, powerups will occasionally fly through the screen that can be collected if the player's character model passes through them. The powerups will look visually distinct from enemies in order to inform the player that they are helpful rather than harmful. Some examples of powerups are listed below:
 
-* Temporary Invincibility - Character cannot be killed for 7 seconds
-* Bullet Time - Character speed is the same, but enemies are slowed down for 7 seconds
+* Temporary Invincibility - Character cannot be killed for 6 seconds
+* Bullet Time - Character speed is the same, but enemies are slowed down for 6 seconds
 * Wipeout - All enemies are cleared from the screen and new enemies will not spawn for 2 seconds
 
 ### Scoring
@@ -39,7 +39,7 @@ The player's score goes up by 1 point for each successful traversal of the field
 * Score Multipliers - Before starting the game, the player will have the choice to select from multiple score modifiers. Each of these make the game harder in some way and have associated score multipliers (x1.1, x1.25, etc.) that will be applied at the end of the game to calculate the player's final score. Some of these modifiers are listed below:
   * Larger Enemies
   * "Fat" mode - Player character is larger and moves slower
-  * Randomize Enemy Speeds - Enemies can be launched with velocites that are slower or faster than standard
+  * Randomize Enemy Speeds - Enemies can be launched with velocities that are slower or faster than standard
   * Angular Enemy Trajectories (default behavior is strictly horizontal movement)
   * Rotating Enemies
   * Beast Mode - This modifier is a special switch that will turn on all existing difficulty modifiers. The reward for using this modifier is a bonus "BEAST MODE" multiplier in addition to the regular multiplicative bonuses that come with each individual modifier for experienced players to quickly boost their score.
