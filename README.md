@@ -19,7 +19,7 @@ The player chooses exactly when to launch their character from one safe zone to 
 
 ## Mechanics
 
-The top and bottom of the screen are designated safe zones where the player character is invincible and collisions with enemies will have no effect. However, if the player doesn't launch their character to the other side in a timely fashion, the character model will begin to grow until it eventually pops and the game is over. There is no concept of levels and the game can not be beaten, however the number of enemies populating the screen will increase as time goes on in order to ramp up the difficulty to the point of impossibility and the player's goal at all times is to beat the high score.
+The top and bottom of the screen are designated safe zones where the player character is invincible and collisions with enemies will have no effect. However, if the player doesn't launch their character to the other side in a timely fashion (~7 seconds), the character model will begin to grow until it eventually pops and the game is over. There is no concept of levels and the game can not be beaten, however the number of enemies populating the screen will increase as time goes on in order to ramp up the difficulty to the point of impossibility and the player's goal at all times is to beat the high score.
 
 ### Powerups
 
@@ -66,4 +66,8 @@ BingBong will be written using a combination of Javascript and Canvas. Additiona
 
 Day 1: Setup project skeleton with anticipated files, webpack, config files, etc. and begin work on the core game mechanics, initial paramaters (player/enemy size, speed, etc.) and collision detection. Special attention will be required for collision with objects that not only translate across the screen, but rotate as well.
 
-Day 2: 
+Day 2: Create powerups that use asynchronous JavaScript functions to enable attributes on the player character for a limited duration of time and ensure interactions between powered up character and enemies are working as intended during that time.
+
+Day 3: Work out how to implement game modifiers that slightly alter game logic, player/enemy interaction, and increase the total score at the end of the game as a result. Persist high scores to localStorage or equivalent.
+
+Day 4: Styling, bug fixes, edge-case testing for unintended consequences of interactions between modifiers/powerups, sound effects and music, hosting on GitHub.
