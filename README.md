@@ -17,6 +17,8 @@ BingBong is a game designed to be easy to pick up and challenging to master. Any
 
 The player chooses exactly when to launch their character from one safe zone to the other (top-to-bottom, bottom-to-top, ad infinitum) in order to avoid the gauntlet of enemies, which fly in from either side and move horizontally. Colliding with any enemy immediately ends the game.
 
+<img src="assets/images/wireframe.png" alt="wireframe"/>
+
 ## Mechanics
 
 The top and bottom of the screen are designated safe zones where the player character is invincible and collisions with enemies will have no effect. However, if the player doesn't launch their character to the other side in a timely fashion (~7 seconds), the character model will begin to grow until it eventually pops and the game is over. There is no concept of levels and the game can not be beaten, however the number of enemies populating the screen will increase as time goes on in order to ramp up the difficulty to the point of impossibility and the player's goal at all times is to beat the high score.
