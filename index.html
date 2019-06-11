@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Bing Bong</title>
-    <style>
-        * {padding: 0; margin: 0; }
-        canvas { background: #000000; display: block; margin: 0 auto; }
-    </style>
-</head>
+    <head>
+        <title>Bing Bong</title>
+    </head>
 <body>
-    
-    <canvas id="myCanvas" width="800" height="500"></canvas>
+    <canvas id="canvas"></canvas>
 
-    <script>
-        const canvas = document.getElementById("myCanvas");
-        const ctx = canvas.getContext("2d");
-
-        let x = canvas.width/2;
-        let y = canvas.height-30;
-        let dx = 2;
-        let dy = -2;
-
-        function draw() {
-            ctx.clearRect(0,0, canvas.width, canvas.height);
-            ctx.beginPath();
-            ctx.arc(x, y, 10, 0, Math.PI * 2);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
-            x += dx;
-            y += dy;
-        }
-        setInterval(draw, 10);
-
-        //Javascript code goes here
-    </script>
+    <script type="application/javascript" src="./dist/main.js"></script>
+    <script type="application/javascript" src="./vendor/keymaster.js"></script>
 
 </body>
 </html>
