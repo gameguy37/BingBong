@@ -26,12 +26,16 @@ class Game {
     addNPCs() {
 
         setInterval( () => {
-            this.addEnemy();
-        }, 3 * 1000);
+            if (Math.random() > 0.25) {
+                this.addEnemy();
+            }
+        }, 1 * 1000);
 
         setInterval( () => {
-            this.addPowerup();
-        }, 10 * 1000)
+            if (Math.random() > 0.5) {
+                this.addPowerup();
+            }
+        }, 12 * 1700);
 
     }
 
