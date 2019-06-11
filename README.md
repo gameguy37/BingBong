@@ -13,9 +13,9 @@ In the last few years, there has been a drastic uptick in popularity of "Rogueli
 
 ## Overview
 
-BingBong is a game designed to be easy to pick up and challenging to master. Anyone can play, as the goal is very simple (traverse the screen) and the user interface is even simpler (only 1 button!). BingBong is essentially a fast-paced version of Frogger, but without the ability to retreat. Once a player has chosen to launch their character from one side to the other, the velocity is constant until the safe zone on the opposite side is reached.
+BingBong is a game designed to be easy to pick up and challenging to master. Anyone can play, as the goal is very simple (traverse the screen) and the user interface is even simpler (only 1 button!). BingBong is essentially a fast-paced version of Frogger, but without the ability to retreat. Like many of the above named "roguelike" games, the game features random generation, limited resources (powerups), and permadeath (each death leads to a complete restart of the game).
 
-The player chooses exactly when to launch their character from one safe zone to the other (top-to-bottom, bottom-to-top, ad infinitum) in order to avoid the gauntlet of enemies, which fly in from either side and move horizontally. Colliding with any enemy immediately ends the game.
+Once a player has chosen to launch their character from one side to the other, the velocity is constant until the safe zone on the opposite side is reached. The player chooses exactly when to launch their character from one safe zone to the other (top-to-bottom, bottom-to-top, ad infinitum) in order to avoid the gauntlet of enemies, which fly in from either side and move horizontally. Colliding with any enemy immediately ends the game. 
 
 <img src="assets/images/wireframe.png" alt="wireframe"/>
 
