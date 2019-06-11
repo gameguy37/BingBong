@@ -21,10 +21,10 @@ class Player extends MovingObject {
 
     launch() {
         if (this.safe_bottom) {
-            this.vel = [0, -10];
+            this.vel = [0, -8];
             this.safe_bottom = false;
         } else if (this.safe_top) {
-            this.vel = [0, 10];
+            this.vel = [0, 8];
             this.safe_top = false;
         } else {
             return;

@@ -6,9 +6,9 @@ const Util = {
 
     entranceVelocity(x) {
         if (x === 0) {
-            return [10, 0];
+            return [5, 0];
         } else {
-            return [-10, 0];
+            return [-5, 0];
         }
     },
 

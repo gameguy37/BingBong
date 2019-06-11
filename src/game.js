@@ -9,7 +9,6 @@ class Game {
         this.player = [];
 
         this.addNPCs();
-        debugger
     }
 
     add(object) {
@@ -25,18 +24,29 @@ class Game {
     }
 
     addNPCs() {
-        for (let i = 0; i < Game.NUM_ENEMIES; i++) {
-            this.add(new Enemy({game: this}));
-        }
-        for (let i = 0; i < Game.NUM_POWERUPS; i++) {
-            this.add(new Powerup({game: this}));
-        }
+
+        setInterval( () => {
+            this.addEnemy();
+        }, 3 * 1000);
+
+        setInterval( () => {
+            this.addPowerup();
+        }, 10 * 1000)
+
     }
 
     addPlayer() {
         const player = new Player({game: this});
         this.add(player);
         return player;
+    }
+
+    addEnemy() {
+        this.add( new Enemy({game: this}));
+    }
+
+    addPowerup() {
+        this.add( new Powerup({game: this}));
     }
 
     allObjects() {
