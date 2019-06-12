@@ -3,6 +3,7 @@ const Enemy = require("./enemy");
 const EnemyCircle = require("./enemy_circle");
 const EnemySquare = require("./enemy_square");
 const Powerup = require("./powerup");
+const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
 const Particle = require("./particle");
 
@@ -39,11 +40,11 @@ class Game {
     }
 
     addNPCs() {
-        // setInterval( () => {
-        //     if (Math.random() > 0.25) {
-        //         this.addEnemyCircle();
-        //     }
-        // }, 1 * 1000);
+        setInterval( () => {
+            if (Math.random() > 0.25) {
+                this.addEnemyCircle();
+            }
+        }, 1 * 1000);
 
         // setInterval(() => {
         //     if (Math.random() > 0.25) {
@@ -51,17 +52,28 @@ class Game {
         //     }
         // }, 1 * 1000);
 
-        setInterval( () => {
+        // setInterval( () => {
+        //     if (Math.random() > 0) {
+        //         this.addPowerupPlusScore();
+        //     }
+        // }, 1 * 1000);
+
+        setInterval(() => {
             if (Math.random() > 0) {
-                this.addPowerupPlusScore();
+                this.addPowerupInvincibility();
             }
         }, 1 * 1000);
+
     }
 
     addPlayer() {
         const player = new Player({game: this});
         this.add(player);
         return player;
+    }
+
+    addPowerupInvincibility() {
+        this.add(new PowerupInvincibility({ game: this }));
     }
 
     addPowerupPlusScore() {
@@ -95,6 +107,7 @@ class Game {
         ctx.shadowBlur = 0;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
+        ctx.beginPath();
         ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
         ctx.fillStyle = Game.SAFE_ZONE_COLOR;
         ctx.fillRect(0, 0, Game.DIM_X, (Game.DIM_Y * 0.03));
@@ -106,6 +119,7 @@ class Game {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(`${this.score}`, 500, 320);
+        ctx.closePath();
 
         this.allObjects().forEach( object => {
             object.draw(ctx);
@@ -117,91 +131,101 @@ class Game {
     drawScoreRipple(ctx) {
         ctx.lineWidth = 8;
         if (this.ripple === 10) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.5)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.5)";
             ctx.arc(500, 300, 200, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 9;
             }, 50);
         }
         if (this.ripple === 9) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.45)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.45)";
             ctx.arc(500, 300, 180, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 8;
             }, 50);
         }
         if (this.ripple === 8) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.40)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.40)";
             ctx.arc(500, 300, 160, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 7;
             }, 50);
         }
         if (this.ripple === 7) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.35)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.35)";
             ctx.arc(500, 300, 140, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 6;
             }, 50);
         }
         if (this.ripple === 6) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.30)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.30)";
             ctx.arc(500, 300, 120, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 5;
             }, 50);
         }
         if (this.ripple === 5) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.25)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.25)";
             ctx.arc(500, 300, 100, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 4;
             }, 50);
         }
         if (this.ripple === 4) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.20)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.20)";
             ctx.arc(500, 300, 80, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 3;
             }, 50);
         }
         if (this.ripple === 3) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.15)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.15)";
             ctx.arc(500, 300, 60, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 2;
             }, 50);
         }
         if (this.ripple === 2) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.10)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.10)";
             ctx.arc(500, 300, 40, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 1;
             }, 50);
         }
         if (this.ripple === 1) {
-            ctx.strokeStyle = "rgba(204, 204, 204, 0.05)";
             ctx.beginPath();
+            ctx.strokeStyle = "rgba(204, 204, 204, 0.05)";
             ctx.arc(500, 300, 20, 0, 2 * Math.PI, true);
             ctx.stroke();
+            ctx.closePath();
             setTimeout(() => {
                 this.ripple = 0;
             }, 50);

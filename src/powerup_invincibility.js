@@ -1,12 +1,12 @@
-const Enemy = require("./enemy");
+const Powerup = require("./powerup");
 const Util = require("./util");
 
-class EnemyCircle extends Enemy {
+class PowerupInvincibility extends Powerup {
     constructor(options) {
         options.pos = [options.game.randomPositionX(), options.game.randomPositionY()];
         options.vel = Util.entranceVelocity(options.pos[0]);
-        options.radius = 20;
-        options.color = "#f45942";
+        options.radius = 12;
+        options.color = "#48f442";
         super(options);
     }
 
@@ -23,7 +23,15 @@ class EnemyCircle extends Enemy {
         ctx.stroke();
         ctx.fill();
         ctx.closePath();
+        ctx.beginPath();
+        ctx.font = "20px Saira Semi Condensed";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("!", this.pos[0], this.pos[1] + 2);
+        ctx.closePath();
     }
+    
 }
 
-module.exports = EnemyCircle;
+module.exports = PowerupInvincibility;
