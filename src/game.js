@@ -1,6 +1,7 @@
 const Player = require("./player");
 const Enemy = require("./enemy");
 const EnemyCircle = require("./enemy_circle");
+const EnemyLine = require("./enemy_line");
 const EnemyRectangleHorizontal = require("./enemy_rectangle_horizontal");
 const EnemyRectangleVertical = require("./enemy_rectangle_vertical");
 const EnemySquare = require("./enemy_square");
@@ -18,6 +19,7 @@ class Game {
         this.particles = [];
         this.score = 0;
         this.ripple = 0;
+        this.speedMultiplier = 1;
 
         this.addNPCs();
     }
@@ -38,6 +40,10 @@ class Game {
         this.add(new EnemyCircle({ game: this }));
     }
 
+    addEnemyLine() {
+        this.add(new EnemyLine({ game: this }));
+    }
+
     addEnemyRectangleHorizontal() {
         this.add(new EnemyRectangleHorizontal({ game: this }));
     }
@@ -51,47 +57,59 @@ class Game {
     }
 
     addNPCs() {
+        // let timeToSpawn = 500;
+
+        // setInterval( () => {
+        //     timeToSpawn -= 5;
+        // }, 2 * 1000);
+
         setInterval( () => {
-            if (Math.random() > 0.25) {
+            if (Math.random() > 0.80) {
                 this.addEnemyCircle();
             }
-        }, 1 * 1100);
+        }, 2.2 * 500);
 
         setInterval(() => {
-            if (Math.random() > 0.4) {
-                this.addEnemyRectangleHorizontal();
+            if (Math.random() > 0.90) {
+                this.addEnemyLine();
             }
-        }, 2 * 1400);
-
-        setInterval(() => {
-            if (Math.random() > 0.15) {
-                this.addEnemyRectangleVertical();
-            }
-        }, 3 * 1600);
+        }, 1.2 * 500);
 
         setInterval(() => {
             if (Math.random() > 0.5) {
-                this.addEnemySquare();
+                this.addEnemyRectangleHorizontal();
             }
-        }, 2 * 1000);
+        }, 3.1 * 500);
 
         setInterval(() => {
-            if (Math.random() > 0.33) {
+            if (Math.random() > 0.45) {
+                this.addEnemyRectangleVertical();
+            }
+        }, 4.3 * 500);
+
+        setInterval(() => {
+            if (Math.random() > 0.20) {
+                this.addEnemySquare();
+            }
+        }, 5.6 * 500);
+
+        setInterval(() => {
+            if (Math.random() > 0.20) {
                 this.addPowerupBulletTime();
             }
-        }, 2 * 1000);
+        }, 22.1 * 500);
 
-        // setInterval( () => {
-        //     if (Math.random() > 0.33) {
-        //         this.addPowerupPlusScore();
-        //     }
-        // }, 24 * 1200);
+        setInterval( () => {
+            if (Math.random() > 0.15) {
+                this.addPowerupPlusScore();
+            }
+        }, 18.2 * 500);
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.25) {
-        //         this.addPowerupInvincibility();
-        //     }
-        // }, 20 * 1300);
+        setInterval(() => {
+            if (Math.random() > 0.25) {
+                this.addPowerupInvincibility();
+            }
+        }, 21.3 * 500);
 
     }
 
@@ -110,7 +128,7 @@ class Game {
     }
 
     addPowerupPlusScore() {
-        this.add( new PowerupPlusScore({game: this}));
+        this.add(new PowerupPlusScore({ game: this }));
     }
 
     allNPCs() {

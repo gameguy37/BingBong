@@ -65,7 +65,7 @@ class Player extends MovingObject {
         }
 
         if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
-            let speedMultiplier = 0.25;
+            let speedMultiplier = 0.33;
             this.game.enemies.forEach( enemy => {
                 enemy.vel[0] = enemy.vel[0] * speedMultiplier;
                 enemy.vel[1] = enemy.vel[1] * speedMultiplier;
@@ -75,8 +75,8 @@ class Player extends MovingObject {
                 powerup.vel[1] = powerup.vel[1] * speedMultiplier;
             })
 
-            Enemy.prototype.speedMultiplier = speedMultiplier;
-            Powerup.prototype.speedMultiplier = speedMultiplier;
+            // Enemy.prototype.speedMultiplier = speedMultiplier;
+            // Powerup.prototype.speedMultiplier = speedMultiplier;
 
             otherObject.remove();
             otherObject.explode();
