@@ -36,10 +36,12 @@ class Player extends MovingObject {
             this.vel = [0, 0];
             this.pos = [500, 552];
             this.safe_bottom = true;
+            this.game.score += 1;
         } else if (this.vulnerable() && this.pos[1] <= 48) {
             this.vel = [0, 0];
             this.pos = [500, 48];
             this.safe_top = true;
+            this.game.score += 1;
         } else {
             return;
         }

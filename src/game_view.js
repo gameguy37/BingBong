@@ -17,10 +17,15 @@ class GameView {
     }
 
     animate(time) {
+        const score = this.game.score;
         const timeDelta = time - this.lastTime;
         this.game.step(timeDelta);
-        this.game.draw(this.ctx);
+        const newScore = this.game.score;
+        if (newScore - score > 0) {
+            this.game.ripple = 10;
+        }
         this.lastTime = time;
+        this.game.draw(this.ctx);
         requestAnimationFrame(this.animate.bind(this));
     }
 
