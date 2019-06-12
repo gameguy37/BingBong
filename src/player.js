@@ -1,6 +1,6 @@
 const MovingObject = require("./moving_object");
 const Enemy = require("./enemy");
-const Powerup = require("./powerup");
+const PowerupPlusScore = require("./powerup_plus_score");
 
 class Player extends MovingObject {
     constructor(options) {
@@ -56,8 +56,9 @@ class Player extends MovingObject {
         //     this.remove();
         //     return true;
         // }
-        if (otherObject instanceof Powerup && this.vulnerable() === true) {
+        if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
             // this.gainPowers();
+            this.game.score += 2;
             otherObject.remove();
             otherObject.explode();
             return true;

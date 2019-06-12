@@ -7,7 +7,6 @@ class Particle extends MovingObject {
         options.radius = 2;
         options.color = options.color;
         super(options);
-        debugger
     }
 
     draw(ctx) {

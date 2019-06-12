@@ -1,9 +1,10 @@
 const Player = require("./player");
 const Enemy = require("./enemy");
-const Powerup = require("./powerup");
-const Particle = require("./particle");
 const EnemyCircle = require("./enemy_circle");
 const EnemySquare = require("./enemy_square");
+const Powerup = require("./powerup");
+const PowerupPlusScore = require("./powerup_plus_score");
+const Particle = require("./particle");
 
 class Game {
     constructor() {
@@ -44,17 +45,17 @@ class Game {
         //     }
         // }, 1 * 1000);
 
-        setInterval(() => {
-            if (Math.random() > 0.25) {
-                this.addEnemySquare();
-            }
-        }, 1 * 1000);
-
-        // setInterval( () => {
-        //     if (Math.random() > 0) {
-        //         this.addPowerup();
+        // setInterval(() => {
+        //     if (Math.random() > 0.25) {
+        //         this.addEnemySquare();
         //     }
         // }, 1 * 1000);
+
+        setInterval( () => {
+            if (Math.random() > 0) {
+                this.addPowerupPlusScore();
+            }
+        }, 1 * 1000);
     }
 
     addPlayer() {
@@ -63,8 +64,8 @@ class Game {
         return player;
     }
 
-    addPowerup() {
-        this.add( new Powerup({game: this}));
+    addPowerupPlusScore() {
+        this.add( new PowerupPlusScore({game: this}));
     }
 
     allNPCs() {

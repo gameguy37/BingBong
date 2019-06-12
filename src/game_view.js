@@ -21,7 +21,7 @@ class GameView {
         const timeDelta = time - this.lastTime;
         this.game.step(timeDelta);
         const newScore = this.game.score;
-        if (newScore - score > 0) {
+        if (newScore - score > 0 && (this.player.safe_bottom === true || this.player.safe_top === true) ) {
             this.game.ripple = 10;
         }
         this.lastTime = time;
