@@ -75,6 +75,10 @@ class Game {
     draw(ctx) {
         ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
         ctx.fillStyle = Game.BG_COLOR;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
         ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
         ctx.fillStyle = Game.SAFE_ZONE_COLOR;
         ctx.fillRect(0, 0, Game.DIM_X, (Game.DIM_Y * 0.03));
@@ -95,8 +99,8 @@ class Game {
     }
 
     drawScoreRipple(ctx) {
+        ctx.lineWidth = 8;
         if (this.ripple === 10) {
-            ctx.lineWidth = 8;
             ctx.strokeStyle = "rgba(204, 204, 204, 0.5)";
             ctx.beginPath();
             ctx.arc(500, 300, 200, 0, 2 * Math.PI, true);

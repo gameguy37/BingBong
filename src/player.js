@@ -72,6 +72,20 @@ class Player extends MovingObject {
     gameOver() {
         alert("GAME OVER");
     }
+
+    draw(ctx) {
+        ctx.fillStyle = "#000000";
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 5;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 40;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.beginPath();
+        ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
+        ctx.fill();
+        ctx.stroke();
+    }
     
 }
 
