@@ -1,12 +1,16 @@
 const Player = require("./player");
 const Enemy = require("./enemy");
 const Powerup = require("./powerup");
+const Particle = require("./particle");
+const EnemyCircle = require("./enemy_circle");
+const EnemySquare = require("./enemy_square");
 
 class Game {
     constructor() {
         this.enemies = [];
         this.powerups = [];
         this.player = [];
+        this.particles = [];
         this.score = 0;
         this.ripple = 0;
 
@@ -25,21 +29,32 @@ class Game {
         }
     }
 
-    addEnemy() {
-        this.add(new Enemy({ game: this }));
+    addEnemyCircle() {
+        this.add(new EnemyCircle({ game: this }));
+    }
+
+    addEnemySquare() {
+        this.add(new EnemySquare({ game: this }));
     }
 
     addNPCs() {
-        setInterval( () => {
+        // setInterval( () => {
+        //     if (Math.random() > 0.25) {
+        //         this.addEnemyCircle();
+        //     }
+        // }, 1 * 1000);
+
+        setInterval(() => {
             if (Math.random() > 0.25) {
-                this.addEnemy();
+                this.addEnemySquare();
             }
         }, 1 * 1000);
-        setInterval( () => {
-            if (Math.random() > 0.5) {
-                this.addPowerup();
-            }
-        }, 12 * 1700);
+
+        // setInterval( () => {
+        //     if (Math.random() > 0) {
+        //         this.addPowerup();
+        //     }
+        // }, 1 * 1000);
     }
 
     addPlayer() {
@@ -53,11 +68,11 @@ class Game {
     }
 
     allNPCs() {
-        return [].concat(this.enemies, this.powerups);
+        return [].concat(this.enemies, this.powerups, this.particles);
     }
 
     allObjects() {
-        return [].concat(this.player, this.enemies, this.powerups);
+        return [].concat(this.player, this.enemies, this.powerups, this.particles);
     }
 
     checkCollisions() {
@@ -192,6 +207,25 @@ class Game {
         }
     }
 
+    explode(object) {
+        for (let i = 0; i < 100; i++) {
+            let posNeg = [1, -1];
+            let directionX = posNeg[Math.floor(Math.random() * posNeg.length)];
+            let directionY = posNeg[Math.floor(Math.random() * posNeg.length)];
+            let vx = directionX * ((Math.random() * 60) - 30);
+            let vy = directionY * ((Math.random() * 60) - 30);
+            this.particles.push(new Particle({
+                pos: object.pos,
+                vel: [vx, vy],
+                color: object.color,
+                game: this,
+            }));
+        }
+        setTimeout(() => {
+            this.particles = [];
+        }, 750);
+    }
+
     isOutOfBounds(pos) {
         return (pos[0] < 0) || (pos[0] > Game.DIM_X) || (pos[1] < 0) || (pos[1] > Game.DIM_Y);
     }
@@ -218,6 +252,8 @@ class Game {
             this.powerups.splice(this.powerups.indexOf(object), 1);
         } else if (object instanceof Player) {
             this.player.splice(this.player.indexOf(object), 1);
+        } else if (object instanceof Particle) {
+            this.particles.splice(this.particles.indexOf(object), 1);
         } else {
             throw new Error("unknown object type");
         }
@@ -235,7 +271,5 @@ Game.DIM_X = 1000;
 Game.DIM_Y = 600;
 Game.BG_COLOR = "#000000";
 Game.SAFE_ZONE_COLOR = "#1c661f";
-Game.NUM_ENEMIES = 5;
-Game.NUM_POWERUPS = 1;
 
 module.exports = Game;

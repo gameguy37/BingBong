@@ -21,10 +21,10 @@ class Player extends MovingObject {
 
     launch() {
         if (this.safe_bottom) {
-            this.vel = [0, -8];
+            this.vel = [0, -10];
             this.safe_bottom = false;
         } else if (this.safe_top) {
-            this.vel = [0, 8];
+            this.vel = [0, 10];
             this.safe_top = false;
         } else {
             return;
@@ -57,8 +57,9 @@ class Player extends MovingObject {
         //     return true;
         // }
         if (otherObject instanceof Powerup && this.vulnerable() === true) {
-            this.gainPowers();
+            // this.gainPowers();
             otherObject.remove();
+            otherObject.explode();
             return true;
         }
 
@@ -85,6 +86,7 @@ class Player extends MovingObject {
         ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
         ctx.fill();
         ctx.stroke();
+        ctx.closePath();
     }
     
 }

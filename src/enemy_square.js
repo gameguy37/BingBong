@@ -1,16 +1,17 @@
-const MovingObject = require("./moving_object");
+const Enemy = require("./enemy");
 const Util = require("./util");
 
-class Powerup extends MovingObject {
+class EnemySquare extends Enemy {
     constructor(options) {
         options.pos = [options.game.randomPositionX(), options.game.randomPositionY()];
         options.vel = Util.entranceVelocity(options.pos[0]);
-        options.radius = 12;
-        options.color = "#48f442";
+        options.radius = 15; /////////
+        options.color = "#f442e8";
         super(options);
     }
 
     draw(ctx) {
+        ctx.fillStyle = "#000000";
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 5;
         ctx.shadowColor = this.color;
@@ -18,12 +19,13 @@ class Powerup extends MovingObject {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.beginPath();
-        ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
+        ctx.strokeRect(this.pos[0] - 15, this.pos[1] - 15, 30, 30);
+        ctx.fillRect(this.pos[0] -15, this.pos[1] -15, 30, 30);
+        ctx.moveTo(-10, -10);
         ctx.stroke();
         ctx.fill();
         ctx.closePath();
     }
-    
 }
 
-module.exports = Powerup;
+module.exports = EnemySquare;
