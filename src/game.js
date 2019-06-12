@@ -1,8 +1,11 @@
 const Player = require("./player");
 const Enemy = require("./enemy");
 const EnemyCircle = require("./enemy_circle");
+const EnemyRectangleHorizontal = require("./enemy_rectangle_horizontal");
+const EnemyRectangleVertical = require("./enemy_rectangle_vertical");
 const EnemySquare = require("./enemy_square");
 const Powerup = require("./powerup");
+const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
 const Particle = require("./particle");
@@ -35,6 +38,14 @@ class Game {
         this.add(new EnemyCircle({ game: this }));
     }
 
+    addEnemyRectangleHorizontal() {
+        this.add(new EnemyRectangleHorizontal({ game: this }));
+    }
+
+    addEnemyRectangleVertical() {
+        this.add(new EnemyRectangleVertical({ game: this }));
+    }
+
     addEnemySquare() {
         this.add(new EnemySquare({ game: this }));
     }
@@ -44,25 +55,43 @@ class Game {
             if (Math.random() > 0.25) {
                 this.addEnemyCircle();
             }
-        }, 1 * 1000);
+        }, 1 * 1100);
+
+        setInterval(() => {
+            if (Math.random() > 0.4) {
+                this.addEnemyRectangleHorizontal();
+            }
+        }, 2 * 1400);
+
+        setInterval(() => {
+            if (Math.random() > 0.15) {
+                this.addEnemyRectangleVertical();
+            }
+        }, 3 * 1600);
+
+        setInterval(() => {
+            if (Math.random() > 0.5) {
+                this.addEnemySquare();
+            }
+        }, 2 * 1000);
+
+        setInterval(() => {
+            if (Math.random() > 0.33) {
+                this.addPowerupBulletTime();
+            }
+        }, 2 * 1000);
+
+        // setInterval( () => {
+        //     if (Math.random() > 0.33) {
+        //         this.addPowerupPlusScore();
+        //     }
+        // }, 24 * 1200);
 
         // setInterval(() => {
         //     if (Math.random() > 0.25) {
-        //         this.addEnemySquare();
+        //         this.addPowerupInvincibility();
         //     }
-        // }, 1 * 1000);
-
-        // setInterval( () => {
-        //     if (Math.random() > 0) {
-        //         this.addPowerupPlusScore();
-        //     }
-        // }, 1 * 1000);
-
-        setInterval(() => {
-            if (Math.random() > 0) {
-                this.addPowerupInvincibility();
-            }
-        }, 1 * 1000);
+        // }, 20 * 1300);
 
     }
 
@@ -70,6 +99,10 @@ class Game {
         const player = new Player({game: this});
         this.add(player);
         return player;
+    }
+
+    addPowerupBulletTime() {
+        this.add(new PowerupBulletTime({ game: this }));
     }
 
     addPowerupInvincibility() {

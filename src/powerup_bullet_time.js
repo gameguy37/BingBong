@@ -1,12 +1,12 @@
-const Enemy = require("./enemy");
+const Powerup = require("./powerup");
 const Util = require("./util");
 
-class EnemySquare extends Enemy {
+class PowerupBulletTime extends Powerup {
     constructor(options) {
         options.pos = [options.game.randomPositionX(), options.game.randomPositionY()];
         options.vel = Util.entranceVelocity(options.pos[0]);
-        options.radius = 15; /////////
-        options.color = "#f442e8";
+        options.radius = 12;
+        options.color = "#48f442";
         super(options);
     }
 
@@ -19,13 +19,19 @@ class EnemySquare extends Enemy {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.beginPath();
-        ctx.strokeRect(this.pos[0] - 15, this.pos[1] - 15, 30, 30);
-        ctx.fillRect(this.pos[0] - 15, this.pos[1] - 15, 30, 30);
-        ctx.moveTo(-15, -15);
+        ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI, true);
         ctx.stroke();
         ctx.fill();
         ctx.closePath();
+        ctx.beginPath();
+        ctx.font = "20px Saira Semi Condensed";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("X", this.pos[0], this.pos[1] + 2);
+        ctx.closePath();
     }
+    
 }
 
-module.exports = EnemySquare;
+module.exports = PowerupBulletTime;

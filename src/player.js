@@ -1,5 +1,7 @@
 const MovingObject = require("./moving_object");
 const Enemy = require("./enemy");
+const Powerup = require("./powerup");
+const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupPlusScore = require("./powerup_plus_score");
 const PowerupInvincibility = require("./powerup_invincibility");
 
@@ -59,6 +61,25 @@ class Player extends MovingObject {
             otherObject.remove();
             otherObject.explode();
             this.game.score += 1;
+            return true;
+        }
+
+        if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
+            let speedMultiplier = 0.25;
+            this.game.enemies.forEach( enemy => {
+                enemy.vel[0] = enemy.vel[0] * speedMultiplier;
+                enemy.vel[1] = enemy.vel[1] * speedMultiplier;
+            })
+            this.game.powerups.forEach( powerup => {
+                powerup.vel[0] = powerup.vel[0] * speedMultiplier;
+                powerup.vel[1] = powerup.vel[1] * speedMultiplier;
+            })
+
+            Enemy.prototype.speedMultiplier = speedMultiplier;
+            Powerup.prototype.speedMultiplier = speedMultiplier;
+
+            otherObject.remove();
+            otherObject.explode();
             return true;
         }
 
