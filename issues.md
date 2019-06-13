@@ -10,3 +10,4 @@ random particle colors
 high score board
 growing player should maybe change colors
 near miss mechanic
+player radius still grows mid-transit

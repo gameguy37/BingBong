@@ -329,7 +329,7 @@ class Game {
         }, 750);
         if (object instanceof PowerupPlusScore) {
             this.notifications.push(new Notification({
-                message: "Score +2",
+                message: `Score +${20 * this.totalScoreMultiplier}`,
                 pos: object.pos,
                 game: this,
             }));
@@ -349,7 +349,7 @@ class Game {
         }
         if (object instanceof Enemy && this.player.length === 1) {
             this.notifications.push(new Notification({
-                message: "Score +1",
+                message: `Score +${10 * this.totalScoreMultiplier}`,
                 pos: object.pos,
                 game: this,
             }));

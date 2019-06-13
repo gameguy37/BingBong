@@ -42,12 +42,12 @@ class Player extends MovingObject {
             this.vel = [0, 0];
             this.pos = [500, 570];
             this.safe_bottom = true;
-            this.game.score += 1;
+            this.game.score += (10 * this.game.totalScoreMultiplier);
         } else if (this.vulnerable() && this.pos[1] <= 30) {
             this.vel = [0, 0];
             this.pos = [500, 30];
             this.safe_top = true;
-            this.game.score += 1;
+            this.game.score += (10 * this.game.totalScoreMultiplier);
         } else {
             return;
         }
@@ -75,7 +75,7 @@ class Player extends MovingObject {
         if (otherObject instanceof Enemy && this.vulnerable() === true && this.invincible === true) {
             otherObject.remove();
             otherObject.explode();
-            this.game.score += 1;
+            this.game.score += (10 * this.game.totalScoreMultiplier);
             return true;
         }
 
@@ -122,7 +122,7 @@ class Player extends MovingObject {
         }
 
         if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
-            this.game.score += 2;
+            this.game.score += (20 * this.game.totalScoreMultiplier);
             otherObject.remove();
             otherObject.explode();
             return true;
@@ -131,7 +131,7 @@ class Player extends MovingObject {
         if (otherObject instanceof PowerupWipeout && this.vulnerable() === true) {
             otherObject.remove();
             otherObject.explode();
-            this.game.score += this.game.enemies.length;
+            this.game.score += (10 * this.game.totalScoreMultiplier * this.game.enemies.length);
             this.game.enemies.forEach(enemy => {
                 enemy.explode();
             })
