@@ -7,3 +7,4 @@ collision for non-circles
 collision for rotating objects
 random particle colors
 high score board
+growing player should maybe change colors

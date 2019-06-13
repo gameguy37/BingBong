@@ -2,6 +2,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  overflow-y: hidden;
 }
 
 .game {

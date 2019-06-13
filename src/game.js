@@ -32,7 +32,6 @@ class Game {
 
         this.totalScoreMultiplier = 1;
 
-
         this.addNPCs();
     }
 
@@ -128,6 +127,7 @@ class Game {
     addPlayer() {
         const player = new Player({game: this});
         this.add(player);
+        this.player[0].growPlayer();
         return player;
     }
 
@@ -166,6 +166,13 @@ class Game {
                     if (collision) return;
                 }
             }
+        }
+    }
+
+    checkRadius() {
+        if (this.player[0].radius === 27) {
+            this.player[0].explode();
+            this.player[0].remove();
         }
     }
 
@@ -392,6 +399,7 @@ class Game {
         this.checkCollisions();
         if (this.player.length !== 0) {
             this.player[0].attemptCatch();
+            this.checkRadius();
         }
     }
 

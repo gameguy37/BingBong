@@ -7,7 +7,7 @@ const PowerupWipeout = require("./powerup_wipeout");
 
 class Player extends MovingObject {
     constructor(options) {
-        options.radius = options.radius || 12; // 30 means explode
+        options.radius = options.radius || 12; // 27 means explode
         options.vel = [0, 0];
         options.color = "#FFFFFF";
         options.pos = options.pos || [500, 570];
@@ -25,9 +25,11 @@ class Player extends MovingObject {
 
     launch() {
         if (this.safe_bottom) {
+            this.radius = 12;
             this.vel = [0, (-10 * this.game.playerSpeedMultiplier)];
             this.safe_bottom = false;
         } else if (this.safe_top) {
+            this.radius = 12;
             this.vel = [0, (10 * this.game.playerSpeedMultiplier)];
             this.safe_top = false;
         } else {
@@ -48,6 +50,14 @@ class Player extends MovingObject {
             this.game.score += 1;
         } else {
             return;
+        }
+    }
+
+    growPlayer() {
+        if (this.safe_bottom === true || this.safe_top === true) {
+            setInterval( () => {
+                this.radius += 1
+            }, 500);
         }
     }
 
