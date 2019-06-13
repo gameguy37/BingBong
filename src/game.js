@@ -28,9 +28,10 @@ class Game {
         this.playerSpeedMultiplier = 1;
         this.enemySpawnFrequencyMultiplier = 1;
         this.enemySizeMultiplier = 1;
-        this.enemySpeedRandom = true;
+        this.enemySpeedRandom = false;
 
         this.totalScoreMultiplier = 1;
+
 
         this.addNPCs();
     }
@@ -68,59 +69,59 @@ class Game {
     }
 
     addNPCs() {
-        setInterval( () => {
+        let enemyCircleId = setInterval( () => {
             if (Math.random() > 0.10) {
                 this.addEnemyCircle();
             }
-        }, ((1 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2.1 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.90) {
-        //         this.addEnemyLine();
-        //     }
-        // }, ((1.2 * 500) / this.enemySpawnFrequencyMultiplier));
+        let enemyLineId = setInterval(() => {
+            if (Math.random() > 0.90) {
+                this.addEnemyLine();
+            }
+        }, ((3 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.5) {
-        //         this.addEnemyRectangleHorizontal();
-        //     }
-        // }, ((3.1 * 500) / this.enemySpawnFrequencyMultiplier));
+        let enemyRectangleHorizontalId = setInterval(() => {
+            if (Math.random() > 0.5) {
+                this.addEnemyRectangleHorizontal();
+            }
+        }, ((3.1 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.45) {
-        //         this.addEnemyRectangleVertical();
-        //     }
-        // }, ((4.3 * 500) / this.enemySpawnFrequencyMultiplier));
+        let enemyRectangleVerticalId = setInterval(() => {
+            if (Math.random() > 0.45) {
+                this.addEnemyRectangleVertical();
+            }
+        }, ((4.3 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.20) {
-        //         this.addEnemySquare();
-        //     }
-        // }, ((5.6 * 500) / this.enemySpawnFrequencyMultiplier));
+        let enemySquareId = setInterval(() => {
+            if (Math.random() > 0.20) {
+                this.addEnemySquare();
+            }
+        }, ((5.6 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.20) {
-        //         this.addPowerupBulletTime();
-        //     }
-        // }, 8 * 500);
+        let powerupBulletTimeId = setInterval(() => {
+            if (Math.random() > 0.20) {
+                this.addPowerupBulletTime();
+            }
+        }, 27.5 * 500);
 
-        // setInterval( () => {
-        //     if (Math.random() > 0.15) {
-        //         this.addPowerupPlusScore();
-        //     }
-        // }, 18.2 * 500);
+        let powerupPlusScoreId = setInterval( () => {
+            if (Math.random() > 0.15) {
+                this.addPowerupPlusScore();
+            }
+        }, 18.2 * 500);
 
-        setInterval(() => {
+        let powerupInvincibilityId = setInterval(() => {
             if (Math.random() > 0.25) {
                 this.addPowerupInvincibility();
             }
-        }, 2 * 500);
+        }, 25.2 * 500);
 
-        // setInterval(() => {
-        //     if (Math.random() > 0.5) {
-        //         this.addPowerupWipeout();
-        //     }
-        // }, 23.9 * 500);
+        let powerupWipeoutId = setInterval(() => {
+            if (Math.random() > 0.5) {
+                this.addPowerupWipeout();
+            }
+        }, 23.9 * 500);
 
     }
 
@@ -155,13 +156,15 @@ class Game {
     }
 
     checkCollisions() {
-        const player = this.player[0];
-        const allNPCs = this.allNPCs();
-        for (let i = 0; i < allNPCs.length; i++) {
-            const npc = allNPCs[i];
-            if (player.isCollidedWith(npc)) {
-                const collision = player.collideWith(npc);
-                if (collision) return;
+        if (this.player.length !== 0) {
+            const player = this.player[0];
+            const allNPCs = this.allNPCs();
+            for (let i = 0; i < allNPCs.length; i++) {
+                const npc = allNPCs[i];
+                if (player.isCollidedWith(npc)) {
+                    const collision = player.collideWith(npc);
+                    if (collision) return;
+                }
             }
         }
     }
@@ -301,7 +304,7 @@ class Game {
     }
 
     explode(object) {
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 25; i++) {
             let posNeg = [1, -1];
             let directionX = posNeg[Math.floor(Math.random() * posNeg.length)];
             let directionY = posNeg[Math.floor(Math.random() * posNeg.length)];
@@ -335,9 +338,9 @@ class Game {
             }));
             setTimeout(() => {
                 this.notifications = [];
-            }, 1000);
+            }, 750);
         }
-        if (object instanceof Enemy) {
+        if (object instanceof Enemy && this.player.length === 1) {
             this.notifications.push(new Notification({
                 message: "Score +1",
                 pos: object.pos,
@@ -345,7 +348,7 @@ class Game {
             }));
             setTimeout(() => {
                 this.notifications = [];
-            }, 1000);
+            }, 750);
         }
     }
 
@@ -365,7 +368,7 @@ class Game {
     }
 
     randomPositionY() {
-        return (Math.random() * ((Game.DIM_Y * 0.90) - (Game.DIM_Y * 0.10)) + (Game.DIM_Y * 0.10));
+        return (Math.random() * ((Game.DIM_Y * 0.80) - (Game.DIM_Y * 0.20)) + (Game.DIM_Y * 0.20));
     }
 
     remove(object) {
@@ -377,6 +380,8 @@ class Game {
             this.player.splice(this.player.indexOf(object), 1);
         } else if (object instanceof Particle) {
             this.particles.splice(this.particles.indexOf(object), 1);
+        } else if (object instanceof Notification) {
+            this.notifications.splice(this.notifications.indexOf(object), 1);
         } else {
             throw new Error("unknown object type");
         }
@@ -385,7 +390,9 @@ class Game {
     step(delta) {
         this.moveObjects(delta);
         this.checkCollisions();
-        this.player[0].attemptCatch();
+        if (this.player.length !== 0) {
+            this.player[0].attemptCatch();
+        }
     }
 
 }

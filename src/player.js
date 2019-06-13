@@ -1,6 +1,5 @@
 const MovingObject = require("./moving_object");
 const Enemy = require("./enemy");
-const Powerup = require("./powerup");
 const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
@@ -56,10 +55,14 @@ class Player extends MovingObject {
         if (otherObject instanceof Enemy && this.vulnerable() === true && this.invincible === false) {
             this.remove();
             this.explode();
+            this.game.enemies.forEach(enemy => {
+                enemy.explode();
+            })
+            this.game.enemies = [];
             return true;
         }
 
-        if (otherObject instanceof Enemy && this.vulnerable() === true && this.invincible === true) { // and player is invincible
+        if (otherObject instanceof Enemy && this.vulnerable() === true && this.invincible === true) {
             otherObject.remove();
             otherObject.explode();
             this.game.score += 1;
@@ -102,6 +105,7 @@ class Player extends MovingObject {
                 this.invincible = false;
                 this.color = "rgba(255, 255, 255, 1)";
             }, 6 * 1000);
+            clearTimeout();
             otherObject.remove();
             otherObject.explode();
             return true;
@@ -117,10 +121,11 @@ class Player extends MovingObject {
         if (otherObject instanceof PowerupWipeout && this.vulnerable() === true) {
             otherObject.remove();
             otherObject.explode();
+            this.game.score += this.game.enemies.length;
             this.game.enemies.forEach(enemy => {
-                enemy.remove();
                 enemy.explode();
             })
+            this.game.enemies = [];
             return true;
         }
         
