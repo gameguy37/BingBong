@@ -1,7 +1,7 @@
 const MovingObject = require("./moving_object");
 const Enemy = require("./enemy");
 const Powerup = require("./powerup");
-// const PowerupBulletTime = require("./powerup_bullet_time");
+const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
 const PowerupWipeout = require("./powerup_wipeout");
@@ -9,9 +9,9 @@ const PowerupWipeout = require("./powerup_wipeout");
 class Player extends MovingObject {
     constructor(options) {
         options.radius = options.radius || 12; // 30 means explode
-        options.vel = options.vel || [0, 0];
+        options.vel = [0, 0];
         options.color = "#FFFFFF";
-        options.pos = options.pos || [500, 552];
+        options.pos = options.pos || [500, 570];
         super(options);
         this.safe_bottom = true;
         this.safe_top = false;
@@ -26,10 +26,10 @@ class Player extends MovingObject {
 
     launch() {
         if (this.safe_bottom) {
-            this.vel = [0, -10];
+            this.vel = [0, (-10 * this.game.playerSpeedMultiplier)];
             this.safe_bottom = false;
         } else if (this.safe_top) {
-            this.vel = [0, 10];
+            this.vel = [0, (10 * this.game.playerSpeedMultiplier)];
             this.safe_top = false;
         } else {
             return;
@@ -37,14 +37,14 @@ class Player extends MovingObject {
     }
 
     attemptCatch() {
-        if (this.vulnerable() && this.pos[1] >= 552) {
+        if (this.vulnerable() && this.pos[1] >= 570) {
             this.vel = [0, 0];
-            this.pos = [500, 552];
+            this.pos = [500, 570];
             this.safe_bottom = true;
             this.game.score += 1;
-        } else if (this.vulnerable() && this.pos[1] <= 48) {
+        } else if (this.vulnerable() && this.pos[1] <= 30) {
             this.vel = [0, 0];
-            this.pos = [500, 48];
+            this.pos = [500, 30];
             this.safe_top = true;
             this.game.score += 1;
         } else {
@@ -66,24 +66,33 @@ class Player extends MovingObject {
             return true;
         }
 
-        // if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
-        //     let speedMultiplier = 0.33;
-        //     this.game.enemies.forEach( enemy => {
-        //         enemy.vel[0] = enemy.vel[0] * speedMultiplier;
-        //         enemy.vel[1] = enemy.vel[1] * speedMultiplier;
-        //     })
-        //     this.game.powerups.forEach( powerup => {
-        //         powerup.vel[0] = powerup.vel[0] * speedMultiplier;
-        //         powerup.vel[1] = powerup.vel[1] * speedMultiplier;
-        //     })
+        if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
+            this.game.npcSpeedMultiplier = 0.4;
+            let revert = (1 / this.game.npcSpeedMultiplier);
+            this.game.enemies.forEach( enemy => {
+                enemy.vel[0] = enemy.vel[0] * this.game.npcSpeedMultiplier;
+                enemy.vel[1] = enemy.vel[1] * this.game.npcSpeedMultiplier;
+            })
+            this.game.powerups.forEach( powerup => {
+                powerup.vel[0] = powerup.vel[0] * this.game.npcSpeedMultiplier;
+                powerup.vel[1] = powerup.vel[1] * this.game.npcSpeedMultiplier;
+            })
+            setTimeout(() => {
+                this.game.npcSpeedMultiplier = 1;
+                this.game.enemies.forEach(enemy => {
+                    enemy.vel[0] = enemy.vel[0] * revert;
+                    enemy.vel[1] = enemy.vel[1] * revert;
+                })
+                this.game.powerups.forEach(powerup => {
+                    powerup.vel[0] = powerup.vel[0] * revert;
+                    powerup.vel[1] = powerup.vel[1] * revert;
+                })
+            }, 6 * 1000);
 
-        //     // Enemy.prototype.speedMultiplier = speedMultiplier;
-        //     // Powerup.prototype.speedMultiplier = speedMultiplier;
-
-        //     otherObject.remove();
-        //     otherObject.explode();
-        //     return true;
-        // }
+            otherObject.remove();
+            otherObject.explode();
+            return true;
+        }
 
         
         if (otherObject instanceof PowerupInvincibility && this.vulnerable() === true) {

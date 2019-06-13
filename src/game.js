@@ -5,8 +5,9 @@ const EnemyLine = require("./enemy_line");
 const EnemyRectangleHorizontal = require("./enemy_rectangle_horizontal");
 const EnemyRectangleVertical = require("./enemy_rectangle_vertical");
 const EnemySquare = require("./enemy_square");
+const Notification = require("./notification");
 const Powerup = require("./powerup");
-// const PowerupBulletTime = require("./powerup_bullet_time");
+const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
 const PowerupWipeout = require("./powerup_wipeout");
@@ -18,15 +19,18 @@ class Game {
         this.powerups = [];
         this.player = [];
         this.particles = [];
+        this.notifications = [];
         this.score = 0;
         this.ripple = 0;
 
-        this.enemySpawnFrequencyMultiplier = 1;
+        this.npcSpeedMultiplier = 1;
         this.angledEnemySpawns = false;
         this.playerSpeedMultiplier = 1;
-        this.enemyCountMultiplier = 1;
+        this.enemySpawnFrequencyMultiplier = 1;
         this.enemySizeMultiplier = 1;
-        this.enemySpeedMultiplier = 1;
+        this.enemySpeedRandom = true;
+
+        this.totalScoreMultiplier = 1;
 
         this.addNPCs();
     }
@@ -64,65 +68,59 @@ class Game {
     }
 
     addNPCs() {
-        // let timeToSpawn = 500;
-
-        // setInterval( () => {
-        //     timeToSpawn -= 5;
-        // }, 2 * 1000);
-
         setInterval( () => {
-            if (Math.random() > 0.80) {
+            if (Math.random() > 0.10) {
                 this.addEnemyCircle();
             }
-        }, 2.2 * 500);
+        }, ((1 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        setInterval(() => {
-            if (Math.random() > 0.90) {
-                this.addEnemyLine();
-            }
-        }, 1.2 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.90) {
+        //         this.addEnemyLine();
+        //     }
+        // }, ((1.2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        setInterval(() => {
-            if (Math.random() > 0.5) {
-                this.addEnemyRectangleHorizontal();
-            }
-        }, 3.1 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.5) {
+        //         this.addEnemyRectangleHorizontal();
+        //     }
+        // }, ((3.1 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        setInterval(() => {
-            if (Math.random() > 0.45) {
-                this.addEnemyRectangleVertical();
-            }
-        }, 4.3 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.45) {
+        //         this.addEnemyRectangleVertical();
+        //     }
+        // }, ((4.3 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        setInterval(() => {
-            if (Math.random() > 0.20) {
-                this.addEnemySquare();
-            }
-        }, 5.6 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.20) {
+        //         this.addEnemySquare();
+        //     }
+        // }, ((5.6 * 500) / this.enemySpawnFrequencyMultiplier));
 
         // setInterval(() => {
         //     if (Math.random() > 0.20) {
         //         this.addPowerupBulletTime();
         //     }
-        // }, 22.1 * 500);
+        // }, 8 * 500);
 
-        setInterval( () => {
-            if (Math.random() > 0.15) {
-                this.addPowerupPlusScore();
-            }
-        }, 18.2 * 500);
+        // setInterval( () => {
+        //     if (Math.random() > 0.15) {
+        //         this.addPowerupPlusScore();
+        //     }
+        // }, 18.2 * 500);
 
         setInterval(() => {
             if (Math.random() > 0.25) {
                 this.addPowerupInvincibility();
             }
-        }, 21.3 * 500);
+        }, 2 * 500);
 
-        setInterval(() => {
-            if (Math.random() > 0.5) {
-                this.addPowerupWipeout();
-            }
-        }, 23.9 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.5) {
+        //         this.addPowerupWipeout();
+        //     }
+        // }, 23.9 * 500);
 
     }
 
@@ -132,9 +130,9 @@ class Game {
         return player;
     }
 
-    // addPowerupBulletTime() {
-    //     this.add(new PowerupBulletTime({ game: this }));
-    // }
+    addPowerupBulletTime() {
+        this.add(new PowerupBulletTime({ game: this }));
+    }
 
     addPowerupInvincibility() {
         this.add(new PowerupInvincibility({ game: this }));
@@ -153,7 +151,7 @@ class Game {
     }
 
     allObjects() {
-        return [].concat(this.player, this.enemies, this.powerups, this.particles);
+        return [].concat(this.player, this.enemies, this.powerups, this.particles, this.notifications);
     }
 
     checkCollisions() {
@@ -178,10 +176,12 @@ class Game {
         ctx.beginPath();
         ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
         ctx.fillStyle = Game.SAFE_ZONE_COLOR;
-        ctx.fillRect(0, 0, Game.DIM_X, (Game.DIM_Y * 0.03));
-        ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.03), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
-        ctx.fillRect(0, (Game.DIM_Y * 0.97), Game.DIM_X, (Game.DIM_Y * 0.03));
-        ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.92), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
+        ctx.shadowColor = Game.SAFE_ZONE_COLOR;
+        ctx.shadowBlur = 20;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.fillRect((Game.DIM_X * 0.49), 0, (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
+        ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
         ctx.font = "160px Saira Semi Condensed";
         ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
         ctx.textAlign = "center";
@@ -317,6 +317,36 @@ class Game {
         setTimeout(() => {
             this.particles = [];
         }, 750);
+        if (object instanceof PowerupPlusScore) {
+            this.notifications.push(new Notification({
+                message: "Score +2",
+                pos: object.pos,
+                game: this,
+            }));
+            setTimeout( () => {
+                this.notifications = [];
+            }, 1000);
+        }
+        if (object instanceof PowerupInvincibility) {
+            this.notifications.push(new Notification({
+                message: "INVINCIBLE",
+                pos: object.pos,
+                game: this,
+            }));
+            setTimeout(() => {
+                this.notifications = [];
+            }, 1000);
+        }
+        if (object instanceof Enemy) {
+            this.notifications.push(new Notification({
+                message: "Score +1",
+                pos: object.pos,
+                game: this,
+            }));
+            setTimeout(() => {
+                this.notifications = [];
+            }, 1000);
+        }
     }
 
     isOutOfBounds(pos) {
@@ -363,6 +393,6 @@ class Game {
 Game.DIM_X = 1000;
 Game.DIM_Y = 600;
 Game.BG_COLOR = "#000000";
-Game.SAFE_ZONE_COLOR = "#1c661f";
+Game.SAFE_ZONE_COLOR = "#4cedff";
 
 module.exports = Game;

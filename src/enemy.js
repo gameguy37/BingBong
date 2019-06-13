@@ -6,7 +6,6 @@ class Enemy extends MovingObject {
         options.vel = options.vel;
         options.radius = options.radius;
         options.color = options.color;
-        options.speedMultiplier = options.speedMultiplier;
         super(options);
     }
 }
