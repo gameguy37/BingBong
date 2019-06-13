@@ -1,9 +1,10 @@
 const MovingObject = require("./moving_object");
 const Enemy = require("./enemy");
 const Powerup = require("./powerup");
-const PowerupBulletTime = require("./powerup_bullet_time");
-const PowerupPlusScore = require("./powerup_plus_score");
+// const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
+const PowerupPlusScore = require("./powerup_plus_score");
+const PowerupWipeout = require("./powerup_wipeout");
 
 class Player extends MovingObject {
     constructor(options) {
@@ -53,7 +54,8 @@ class Player extends MovingObject {
 
     collideWith(otherObject) {
         if (otherObject instanceof Enemy && this.vulnerable() === true && this.invincible === false) {
-            this.gameOver();
+            this.remove();
+            this.explode();
             return true;
         }
 
@@ -64,32 +66,26 @@ class Player extends MovingObject {
             return true;
         }
 
-        if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
-            let speedMultiplier = 0.33;
-            this.game.enemies.forEach( enemy => {
-                enemy.vel[0] = enemy.vel[0] * speedMultiplier;
-                enemy.vel[1] = enemy.vel[1] * speedMultiplier;
-            })
-            this.game.powerups.forEach( powerup => {
-                powerup.vel[0] = powerup.vel[0] * speedMultiplier;
-                powerup.vel[1] = powerup.vel[1] * speedMultiplier;
-            })
+        // if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
+        //     let speedMultiplier = 0.33;
+        //     this.game.enemies.forEach( enemy => {
+        //         enemy.vel[0] = enemy.vel[0] * speedMultiplier;
+        //         enemy.vel[1] = enemy.vel[1] * speedMultiplier;
+        //     })
+        //     this.game.powerups.forEach( powerup => {
+        //         powerup.vel[0] = powerup.vel[0] * speedMultiplier;
+        //         powerup.vel[1] = powerup.vel[1] * speedMultiplier;
+        //     })
 
-            // Enemy.prototype.speedMultiplier = speedMultiplier;
-            // Powerup.prototype.speedMultiplier = speedMultiplier;
+        //     // Enemy.prototype.speedMultiplier = speedMultiplier;
+        //     // Powerup.prototype.speedMultiplier = speedMultiplier;
 
-            otherObject.remove();
-            otherObject.explode();
-            return true;
-        }
+        //     otherObject.remove();
+        //     otherObject.explode();
+        //     return true;
+        // }
 
-        if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
-            this.game.score += 2;
-            otherObject.remove();
-            otherObject.explode();
-            return true;
-        }
-
+        
         if (otherObject instanceof PowerupInvincibility && this.vulnerable() === true) {
             this.invincible = true;
             this.color = "#237dfc";
@@ -102,6 +98,23 @@ class Player extends MovingObject {
             return true;
         }
 
+        if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
+            this.game.score += 2;
+            otherObject.remove();
+            otherObject.explode();
+            return true;
+        }
+
+        if (otherObject instanceof PowerupWipeout && this.vulnerable() === true) {
+            otherObject.remove();
+            otherObject.explode();
+            this.game.enemies.forEach(enemy => {
+                enemy.remove();
+                enemy.explode();
+            })
+            return true;
+        }
+        
         return false;
     }
 

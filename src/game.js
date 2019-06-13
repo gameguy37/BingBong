@@ -6,9 +6,10 @@ const EnemyRectangleHorizontal = require("./enemy_rectangle_horizontal");
 const EnemyRectangleVertical = require("./enemy_rectangle_vertical");
 const EnemySquare = require("./enemy_square");
 const Powerup = require("./powerup");
-const PowerupBulletTime = require("./powerup_bullet_time");
+// const PowerupBulletTime = require("./powerup_bullet_time");
 const PowerupInvincibility = require("./powerup_invincibility");
 const PowerupPlusScore = require("./powerup_plus_score");
+const PowerupWipeout = require("./powerup_wipeout");
 const Particle = require("./particle");
 
 class Game {
@@ -19,7 +20,13 @@ class Game {
         this.particles = [];
         this.score = 0;
         this.ripple = 0;
-        this.speedMultiplier = 1;
+
+        this.enemySpawnFrequencyMultiplier = 1;
+        this.angledEnemySpawns = false;
+        this.playerSpeedMultiplier = 1;
+        this.enemyCountMultiplier = 1;
+        this.enemySizeMultiplier = 1;
+        this.enemySpeedMultiplier = 1;
 
         this.addNPCs();
     }
@@ -93,11 +100,11 @@ class Game {
             }
         }, 5.6 * 500);
 
-        setInterval(() => {
-            if (Math.random() > 0.20) {
-                this.addPowerupBulletTime();
-            }
-        }, 22.1 * 500);
+        // setInterval(() => {
+        //     if (Math.random() > 0.20) {
+        //         this.addPowerupBulletTime();
+        //     }
+        // }, 22.1 * 500);
 
         setInterval( () => {
             if (Math.random() > 0.15) {
@@ -111,6 +118,12 @@ class Game {
             }
         }, 21.3 * 500);
 
+        setInterval(() => {
+            if (Math.random() > 0.5) {
+                this.addPowerupWipeout();
+            }
+        }, 23.9 * 500);
+
     }
 
     addPlayer() {
@@ -119,9 +132,9 @@ class Game {
         return player;
     }
 
-    addPowerupBulletTime() {
-        this.add(new PowerupBulletTime({ game: this }));
-    }
+    // addPowerupBulletTime() {
+    //     this.add(new PowerupBulletTime({ game: this }));
+    // }
 
     addPowerupInvincibility() {
         this.add(new PowerupInvincibility({ game: this }));
@@ -129,6 +142,10 @@ class Game {
 
     addPowerupPlusScore() {
         this.add(new PowerupPlusScore({ game: this }));
+    }
+
+    addPowerupWipeout() {
+        this.add(new PowerupWipeout({ game: this }));
     }
 
     allNPCs() {

@@ -2,13 +2,34 @@
 <html>
     <head>
         <title>Bing Bong</title>
+        <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/modal.css">
+        <script type="application/javascript" src="./src/bundle.js"></script>
+        <script type="application/javascript" src="./vendor/keymaster.js"></script>
+        
     </head>
 <body>
     <canvas id="canvas"></canvas>
-
-    <link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed&display=swap" rel="stylesheet">
-    <script type="application/javascript" src="./src/bundle.js"></script>
-    <script type="application/javascript" src="./vendor/keymaster.js"></script>
+    <div class="multipliers">
+        <div class="multipliers-standard">
+            <button class="multiplier-btn" id="faster-enemies">Faster Enemies</button>
+            <button class="multiplier-btn" id="angled-enemy-spawns">Angled Enemy Spawns</button>
+            <button class="multiplier-btn" id="slow-player">Slow Player</button>
+            <button class="multiplier-btn" id="more-enemies">More Enemies</button>
+            <button class="multiplier-btn" id="larger-enemies">Larger Enemies</button>
+            <button class="multiplier-btn" id="random-enemy-speed">Random Enemy Speed</button>
+        </div>
+        <div class="multipliers-beast">
+            <button class="multiplier-btn-beast" id="beast-mode">BEAST MODE!!!</button>
+        </div>
+    </div>
+    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>modal text</p>
+        </div>
+    </div>
 
 </body>
 </html>
