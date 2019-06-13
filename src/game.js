@@ -24,13 +24,31 @@ class Game {
         this.ripple = 0;
 
         this.npcSpeedMultiplier = 1;
-        this.angledEnemySpawns = false;
+        this.angledEnemySpawns = true;
         this.playerSpeedMultiplier = 1;
         this.enemySpawnFrequencyMultiplier = 1;
         this.enemySizeMultiplier = 1;
-        this.enemySpeedRandom = false;
+        this.enemySpeedRandom = true;
 
         this.totalScoreMultiplier = 1;
+        if (this.npcSpeedMultiplier > 1) {
+            this.totalScoreMultiplier *= 1.5;
+        }
+        if (this.angledEnemySpawns === true) {
+            this.totalScoreMultiplier *= 2;
+        }
+        if (this.playerSpeedMultiplier < 1) {
+            this.totalScoreMultiplier *= 1.2;
+        }
+        if (this.enemySpawnFrequencyMultiplier > 1) {
+            this.totalScoreMultiplier *= 1.5;
+        }
+        if (this.enemySizeMultiplier > 1) {
+            this.totalScoreMultiplier *= 1.2;
+        }
+        if (this.enemySpeedRandom === true) {
+            this.totalScoreMultiplier *= 1.5;
+        }
 
         this.addNPCs();
     }
