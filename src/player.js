@@ -57,7 +57,7 @@ class Player extends MovingObject {
         if (this.safe_bottom === true || this.safe_top === true) {
             setInterval( () => {
                 this.radius += 1
-            }, 500);
+            }, 533);
         }
     }
 
@@ -69,6 +69,9 @@ class Player extends MovingObject {
                 enemy.explode();
             })
             this.game.enemies = [];
+            setTimeout( () => {
+                this.game.playing = false;
+            }, 1500);
             return true;
         }
 
@@ -111,13 +114,14 @@ class Player extends MovingObject {
         if (otherObject instanceof PowerupInvincibility && this.vulnerable() === true) {
             this.invincible = true;
             this.color = "#237dfc";
+            this.vel[1] *= 1.5;
             this.game.playerSpeedMultiplier *= 1.5;
             setTimeout(() => {
                 this.invincible = false;
                 this.color = "rgba(255, 255, 255, 1)";
+                this.vel[1] /= 1.5;
                 this.game.playerSpeedMultiplier /= 1.5;
             }, 6 * 1000);
-            clearTimeout();
             otherObject.remove();
             otherObject.explode();
             return true;

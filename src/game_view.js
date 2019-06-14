@@ -7,7 +7,16 @@ class GameView {
 
     bindKeyHandler() {
         const player = this.player;
-        key("space", () => { player.launch(); });
+        if (this.game.playing === true) {
+            key("space", () => { player.launch(); });
+        } else {
+            key("space", () => {
+                debugger
+                this.game.playing = true;
+                new GameView(this.game, this.ctx);
+                debugger
+            });
+        }
     }
 
     start() {

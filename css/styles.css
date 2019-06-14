@@ -5,6 +5,13 @@ body {
   overflow-y: hidden;
 }
 
+#rules-and-canvas {
+  width: 1500px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .game {
   text-align: center;
   width: 1010px;
@@ -15,22 +22,22 @@ body {
   align-items: center;
 }
 
+section {
+  height: 610px;
+  width: 200px;
+  background: white;
+  color: blue;
+}
+
 #canvas {
   border: 5px solid #636e77;
 }
 
-.multipliers-standard {
+.multipliers{
   width: 1010px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 15px;
-}
-
-.multipliers-beast {
-  width: 1010px;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 .multiplier-btn {
@@ -50,6 +57,7 @@ body {
 
 .multiplier-btn-beast {
   padding: 20px;
+  width: 150px;
   border: 1px solid #333333;
   color: #333333;
   background-color: white;
@@ -61,6 +69,18 @@ body {
   color: white;
   background-color: #ca2c2c;
   border: 1px solid black;
+}
+
+.start-btn {
+  padding: 20px;
+  width: 350px;
+  margin-top: 15px;
+  border: 5px solid white;
+  color: #333333;
+  background-color: #4cedff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .high-scores {

@@ -10,26 +10,28 @@
     </head>
 <body background="assets/images/tron6.jpg">
     <div class="game">
-        <canvas id="canvas"></canvas>
+        <div id="rules-and-canvas">
+            <section class="rules">Lorem Ipsum</section>
+            <canvas id="canvas"></canvas>
+            <section class="rules">Lorem Ipsum</section>
+        </div>
         <div class="multipliers">
-            <div class="multipliers-standard">
-                <button class="multiplier-btn" id="faster-npcs">Faster Enemies & Powerups</button>
-                <button class="multiplier-btn" id="angled-enemy-spawns">Angled Enemy Spawns</button>
-                <button class="multiplier-btn" id="slow-player">Slow Player</button>
-                <button class="multiplier-btn" id="more-enemies">More Enemies</button>
-                <button class="multiplier-btn" id="larger-enemies">Larger Enemies</button>
-                <button class="multiplier-btn" id="random-enemy-speed">Random Enemy Speed</button>
-            </div>
-            <div class="multipliers-beast">
-                <button class="multiplier-btn-beast" id="beast-mode">BEAST MODE!!!</button>
-            </div>
+            <button class="multiplier-btn" id="faster-npcs">Faster Enemies & Powerups</button>
+            <button class="multiplier-btn" id="angled-enemy-spawns">Angled Enemy Spawns</button>
+            <button class="multiplier-btn" id="slow-player">Slow Player</button>
+            <button class="multiplier-btn" id="more-enemies">More Enemies</button>
+            <button class="multiplier-btn" id="random-enemy-speed">Random Enemy Speed</button>
+            <button class="multiplier-btn-beast" id="beast-mode">BEAST MODE!!!</button>
+        </div>
+        <div>
+            <button class="start-btn" id="start-game">START</button>
         </div>
 
-        <div class="high-scores">
+        <!-- <div class="high-scores">
             <span>Highscore 1</span>
             <span>Highscore 2</span>
             <span>Highscore 3</span>
-        </div>
+        </div> -->
     </div>
     
     <div id="myModal" class="modal">

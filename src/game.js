@@ -15,6 +15,7 @@ const Particle = require("./particle");
 
 class Game {
     constructor() {
+        this.playing = true;
         this.enemies = [];
         this.powerups = [];
         this.player = [];
@@ -27,27 +28,58 @@ class Game {
         this.angledEnemySpawns = false;
         this.playerSpeedMultiplier = 1;
         this.enemySpawnFrequencyMultiplier = 1;
-        this.enemySizeMultiplier = 1; ///////
         this.enemySpeedRandom = false;
 
         this.totalScoreMultiplier = 1;
-        if (this.npcSpeedMultiplier > 1) {
-            this.totalScoreMultiplier *= 1.5;
+
+        document.getElementById('faster-npcs').onclick = () => {
+            if (this.npcSpeedMultiplier === 1) {
+                this.npcSpeedMultiplier = 1.5;
+                this.totalScoreMultiplier *= 1.5;
+            } else {
+                this.npcSpeedMultiplier = 1;
+                this.totalScoreMultiplier /= 1.5;
+            }
         }
-        if (this.angledEnemySpawns === true) {
-            this.totalScoreMultiplier *= 2;
+
+        document.getElementById('angled-enemy-spawns').onclick = () => {
+            if (this.angledEnemySpawns === false) {
+                this.angledEnemySpawns = true;
+                this.totalScoreMultiplier *= 2;
+            } else {
+                this.angledEnemySpawns = false;
+                this.totalScoreMultiplier /= 2;
+            }
         }
-        if (this.playerSpeedMultiplier < 1) {
-            this.totalScoreMultiplier *= 1.2;
+
+        document.getElementById('slow-player').onclick = () => {
+            if (this.playerSpeedMultiplier === 1) {
+                this.playerSpeedMultiplier = 0.75;
+                this.totalScoreMultiplier *= 1.2;
+            } else {
+                this.playerSpeedMultiplier = 1;
+                this.totalScoreMultiplier /= 1.2;
+            }
         }
-        if (this.enemySpawnFrequencyMultiplier > 1) {
-            this.totalScoreMultiplier *= 1.5;
+
+        document.getElementById('more-enemies').onclick = () => {
+            if (this.enemySpawnFrequencyMultiplier === 1) {
+                this.enemySpawnFrequencyMultiplier = 1.5;
+                this.totalScoreMultiplier *= 1.5;
+            } else {
+                this.enemySpawnFrequencyMultiplier = 1;
+                this.totalScoreMultiplier /= 1.5;
+            }
         }
-        if (this.enemySizeMultiplier > 1) {
-            this.totalScoreMultiplier *= 1.2;
-        }
-        if (this.enemySpeedRandom === true) {
-            this.totalScoreMultiplier *= 1.5;
+
+        document.getElementById('random-enemy-speed').onclick = () => {
+            if (this.enemySpeedRandom === false) {
+                this.enemySpeedRandom = true;
+                this.totalScoreMultiplier *= 1.5;
+            } else {
+                this.enemySpeedRandom = false;
+                this.totalScoreMultiplier /= 1.5;
+            }
         }
 
         this.addNPCs();
@@ -86,59 +118,59 @@ class Game {
     }
 
     addNPCs() {
-        let enemyCircleId = setInterval( () => {
+        setInterval( () => {
             if (Math.random() > 0.10) {
                 this.addEnemyCircle();
             }
-        }, ((2.1 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        let enemyLineId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.90) {
                 this.addEnemyLine();
             }
-        }, ((3 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        let enemyRectangleHorizontalId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.5) {
                 this.addEnemyRectangleHorizontal();
             }
-        }, ((3.1 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        let enemyRectangleVerticalId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.45) {
                 this.addEnemyRectangleVertical();
             }
-        }, ((4.3 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        let enemySquareId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.20) {
                 this.addEnemySquare();
             }
-        }, ((5.6 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
-        let powerupBulletTimeId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.20) {
                 this.addPowerupBulletTime();
             }
-        }, 21.4 * 500);
+        }, 2 * 500);
 
-        let powerupPlusScoreId = setInterval( () => {
+        setInterval( () => {
             if (Math.random() > 0.15) {
                 this.addPowerupPlusScore();
             }
-        }, 18.2 * 500);
+        }, 2 * 500);
 
-        let powerupInvincibilityId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.25) {
                 this.addPowerupInvincibility();
             }
-        }, 4 * 500);
+        }, 2 * 500);
 
-        let powerupWipeoutId = setInterval(() => {
+        setInterval(() => {
             if (Math.random() > 0.5) {
                 this.addPowerupWipeout();
             }
-        }, 23.9 * 500);
+        }, 2 * 500);
 
     }
 
@@ -195,38 +227,49 @@ class Game {
     }
 
     draw(ctx) {
-        ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
-        ctx.fillStyle = Game.BG_COLOR;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.beginPath();
-        ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
-        ctx.fillStyle = Game.SAFE_ZONE_COLOR;
-        ctx.shadowColor = Game.SAFE_ZONE_COLOR;
-        ctx.shadowBlur = 20;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.fillRect((Game.DIM_X * 0.49), 0, (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
-        ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
-        ctx.font = "160px Saira Semi Condensed";
-        ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(`${Math.ceil(this.score)}`, 500, 320);
-        ctx.font = "30px Saira Semi Condensed";
-        ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
-        ctx.fillText(`Score Multiplier: x ${parseFloat(this.totalScoreMultiplier).toFixed(2)}`, 10, 580);
-        ctx.closePath();
+        if (this.playing === true) {
+            ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+            ctx.fillStyle = Game.BG_COLOR;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.beginPath();
+            ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
+            ctx.fillStyle = Game.SAFE_ZONE_COLOR;
+            ctx.shadowColor = Game.SAFE_ZONE_COLOR;
+            ctx.shadowBlur = 20;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.fillRect((Game.DIM_X * 0.49), 0, (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
+            ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
+            ctx.font = "160px Saira Semi Condensed";
+            ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(`${Math.ceil(this.score)}`, 500, 320);
+            ctx.font = "30px Saira Semi Condensed";
+            ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
+            ctx.textAlign = "left";
+            ctx.textBaseline = "middle";
+            ctx.fillText(`Score Multiplier: x ${parseFloat(this.totalScoreMultiplier).toFixed(2)}`, 10, 580);
+            ctx.closePath();
 
-        this.allObjects().forEach( object => {
-            object.draw(ctx);
-        });
+            this.allObjects().forEach( object => {
+                object.draw(ctx);
+            });
 
-        this.drawScoreRipple(ctx);
+            this.drawScoreRipple(ctx);
+        } else {
+            ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+            ctx.fillStyle = Game.BG_COLOR;
+            ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
+            ctx.font = "160px Saira Semi Condensed";
+            ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("GAME OVER", 500, 320);
+        }
     }
 
     drawScoreRipple(ctx) {

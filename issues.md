@@ -1,11 +1,11 @@
 no startup screen
 no game over screen or notification
-no score modifiers
+rules
 powerups need timer countdown visual
-collision for non-circles
-collision for rotating objects
 high score board
+sound
 
+collision for rotating objects
 near miss mechanic
 
 font awesome icons

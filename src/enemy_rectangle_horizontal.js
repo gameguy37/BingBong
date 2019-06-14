@@ -7,7 +7,7 @@ class EnemyRectangleHorizontal extends Enemy {
         options.vel = Util.entranceVelocity(options.pos[0]);
         options.width = 60;
         options.length = 30;
-        options.color = "#f5fc20";
+        options.color = "#f9e43e";
         super(options);
     }
 
