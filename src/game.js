@@ -23,10 +23,10 @@ class Game {
         this.score = 0;
         this.ripple = 0;
 
-        this.npcSpeedMultiplier = 1.5;
+        this.npcSpeedMultiplier = 1;
         this.angledEnemySpawns = false;
-        this.playerSpeedMultiplier = 0.9;
-        this.enemySpawnFrequencyMultiplier = 1.2;
+        this.playerSpeedMultiplier = 1;
+        this.enemySpawnFrequencyMultiplier = 1;
         this.enemySizeMultiplier = 1; ///////
         this.enemySpeedRandom = false;
 
@@ -352,7 +352,7 @@ class Game {
         }, 750);
         if (object instanceof PowerupPlusScore) {
             this.notifications.push(new Notification({
-                message: `Score +${20 * this.totalScoreMultiplier}`,
+                message: `Score +${parseFloat(20 * this.totalScoreMultiplier).toFixed(0)}`,
                 pos: object.pos,
                 game: this,
             }));
@@ -372,7 +372,7 @@ class Game {
         }
         if (object instanceof Enemy && this.player.length === 1) {
             this.notifications.push(new Notification({
-                message: `Score +${10 * this.totalScoreMultiplier}`,
+                message: `Score +${parseFloat(10 * this.totalScoreMultiplier).toFixed(0)}`,
                 pos: object.pos,
                 game: this,
             }));

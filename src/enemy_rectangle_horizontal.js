@@ -5,7 +5,8 @@ class EnemyRectangleHorizontal extends Enemy {
     constructor(options) {
         options.pos = [options.game.randomPositionX(), options.game.randomPositionY()];
         options.vel = Util.entranceVelocity(options.pos[0]);
-        options.radius = 15; /////////
+        options.width = 60;
+        options.length = 30;
         options.color = "#f5fc20";
         super(options);
     }
@@ -19,9 +20,9 @@ class EnemyRectangleHorizontal extends Enemy {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.beginPath();
-        ctx.strokeRect(this.pos[0] - 30, this.pos[1] - 15, 60, 30);
-        ctx.fillRect(this.pos[0] - 30, this.pos[1] - 15, 60, 30);
-        ctx.moveTo(-30, -15);
+        ctx.strokeRect(this.pos[0] - (this.width / 2), this.pos[1] - (this.length / 2), this.width, this.length);
+        ctx.fillRect(this.pos[0] - (this.width / 2), this.pos[1] - (this.length / 2), this.width, this.length);
+        ctx.moveTo(-(this.width / 2), -(this.length / 2));
         ctx.stroke();
         ctx.fill();
         ctx.closePath();

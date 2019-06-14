@@ -5,7 +5,8 @@ class EnemySquare extends Enemy {
     constructor(options) {
         options.pos = [options.game.randomPositionX(), options.game.randomPositionY()];
         options.vel = Util.entranceVelocity(options.pos[0]);
-        options.radius = 15; /////////
+        options.width = 30;
+        options.length = 30;
         options.color = "#f442e8";
         super(options);
     }
@@ -19,9 +20,9 @@ class EnemySquare extends Enemy {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.beginPath();
-        ctx.strokeRect(this.pos[0] - 15, this.pos[1] - 15, 30, 30);
-        ctx.fillRect(this.pos[0] - 15, this.pos[1] - 15, 30, 30);
-        ctx.moveTo(-15, -15);
+        ctx.strokeRect(this.pos[0] - (this.width / 2), this.pos[1] - (this.length / 2), this.width, this.length);
+        ctx.fillRect(this.pos[0] - (this.width / 2), this.pos[1] - (this.length / 2), this.width, this.length);
+        ctx.moveTo(-(this.width / 2), -(this.length / 2));
         ctx.stroke();
         ctx.fill();
         ctx.closePath();
