@@ -28,7 +28,7 @@ class PowerupBulletTime extends Powerup {
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("S", this.pos[0], this.pos[1] + 2);
+        ctx.fillText('S', this.pos[0], this.pos[1] + 2);
         ctx.closePath();
     }
     

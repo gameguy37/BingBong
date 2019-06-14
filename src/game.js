@@ -23,12 +23,12 @@ class Game {
         this.score = 0;
         this.ripple = 0;
 
-        this.npcSpeedMultiplier = 1;
-        this.angledEnemySpawns = true;
-        this.playerSpeedMultiplier = 1;
-        this.enemySpawnFrequencyMultiplier = 1;
-        this.enemySizeMultiplier = 1;
-        this.enemySpeedRandom = true;
+        this.npcSpeedMultiplier = 1.5;
+        this.angledEnemySpawns = false;
+        this.playerSpeedMultiplier = 0.9;
+        this.enemySpawnFrequencyMultiplier = 1.2;
+        this.enemySizeMultiplier = 1; ///////
+        this.enemySpeedRandom = false;
 
         this.totalScoreMultiplier = 1;
         if (this.npcSpeedMultiplier > 1) {
@@ -120,7 +120,7 @@ class Game {
             if (Math.random() > 0.20) {
                 this.addPowerupBulletTime();
             }
-        }, 27.5 * 500);
+        }, 21.4 * 500);
 
         let powerupPlusScoreId = setInterval( () => {
             if (Math.random() > 0.15) {
@@ -132,7 +132,7 @@ class Game {
             if (Math.random() > 0.25) {
                 this.addPowerupInvincibility();
             }
-        }, 25.2 * 500);
+        }, 4 * 500);
 
         let powerupWipeoutId = setInterval(() => {
             if (Math.random() > 0.5) {
@@ -214,7 +214,12 @@ class Game {
         ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(`${this.score}`, 500, 320);
+        ctx.fillText(`${Math.ceil(this.score)}`, 500, 320);
+        ctx.font = "30px Saira Semi Condensed";
+        ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(`Score Multiplier: x ${parseFloat(this.totalScoreMultiplier).toFixed(2)}`, 10, 580);
         ctx.closePath();
 
         this.allObjects().forEach( object => {

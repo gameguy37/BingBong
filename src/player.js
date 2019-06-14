@@ -111,9 +111,11 @@ class Player extends MovingObject {
         if (otherObject instanceof PowerupInvincibility && this.vulnerable() === true) {
             this.invincible = true;
             this.color = "#237dfc";
+            this.game.playerSpeedMultiplier *= 1.5;
             setTimeout(() => {
                 this.invincible = false;
                 this.color = "rgba(255, 255, 255, 1)";
+                this.game.playerSpeedMultiplier /= 1.5;
             }, 6 * 1000);
             clearTimeout();
             otherObject.remove();
