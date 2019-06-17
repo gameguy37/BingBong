@@ -487,7 +487,7 @@ class Game {
         scores.push(hs3);
         scores.push(hs4);
         scores.push(hs5);
-        scores.push(score.toString());
+        scores.push(score.toFixed(0).toString());
 
         let orderedScores = scores.sort(function(a,b){return a - b}).reverse();
         scores = [];
