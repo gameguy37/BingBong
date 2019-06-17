@@ -449,11 +449,37 @@ class Game {
     }
 
     updateHighScores(score) {
-        let hs1 = localStorage.getItem('hs1');
-        let hs2 = localStorage.getItem('hs2');
-        let hs3 = localStorage.getItem('hs3');
-        let hs4 = localStorage.getItem('hs4');
-        let hs5 = localStorage.getItem('hs5');
+        let hs1;
+        let hs2;
+        let hs3;
+        let hs4;
+        let hs5;
+
+        if (localStorage.getItem('hs1')) {
+            hs1 = localStorage.getItem('hs1');
+        } else {
+            hs1 = 0;
+        }
+        if (localStorage.getItem('hs2')) {
+            hs2 = localStorage.getItem('hs2');
+        } else {
+            hs2 = 0;
+        }
+        if (localStorage.getItem('hs3')) {
+            hs3 = localStorage.getItem('hs3');
+        } else {
+            hs3 = 0;
+        }
+        if (localStorage.getItem('hs4')) {
+            hs4 = localStorage.getItem('hs4');
+        } else {
+            hs4 = 0;
+        }
+        if (localStorage.getItem('hs5')) {
+            hs5 = localStorage.getItem('hs5');
+        } else {
+            hs5 = 0;
+        }
 
         let scores = [];
         scores.push(hs1);
@@ -462,16 +488,15 @@ class Game {
         scores.push(hs4);
         scores.push(hs5);
         scores.push(score.toString());
-        debugger
+
         let orderedScores = scores.sort(function(a,b){return a - b}).reverse();
         scores = [];
-        debugger
+    
         hs1 = orderedScores[0];
         hs2 = orderedScores[1];
         hs3 = orderedScores[2];
         hs4 = orderedScores[3];
         hs5 = orderedScores[4];
-        debugger
         
         localStorage.setItem('hs5', hs5);
         localStorage.setItem('hs4', hs4);
