@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             npcSpeedMultiplierBool = false;
             fasterNPCs.setAttribute("class", "multiplier-btn");
         }
+        fasterNPCs.blur();
     }
 
     let angledEnemySpawns = document.getElementById('angled-enemy-spawns');
@@ -260,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
             angledEnemySpawnsBool = false;
             angledEnemySpawns.setAttribute("class", "multiplier-btn");
         }
+        angledEnemySpawns.blur();
     }
 
     let playerSpeedMultiplier = document.getElementById('slow-player');
@@ -271,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playerSpeedMultiplierBool = false;
             playerSpeedMultiplier.setAttribute("class", "multiplier-btn");
         }
+        playerSpeedMultiplier.blur();
     }
 
     let enemySpawnFrequencyMultiplier = document.getElementById('more-enemies');
@@ -282,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
             enemySpawnFrequencyMultiplierBool = false;
             enemySpawnFrequencyMultiplier.setAttribute("class", "multiplier-btn");
         }
+        enemySpawnFrequencyMultiplier.blur();
     }
 
     let enemySpeedRandom = document.getElementById('random-enemy-speed');
@@ -293,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             enemySpeedRandomBool = false;
             enemySpeedRandom.setAttribute("class", "multiplier-btn");
         }
+        enemySpeedRandom.blur();
     }
 
     /////////////
