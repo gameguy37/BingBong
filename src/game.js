@@ -125,52 +125,52 @@ class Game {
         }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
-            if (Math.random() > 0.90) {
+            if (Math.random() > 0.35) {
                 this.addEnemyLine();
             }
-        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
-
-        setInterval(() => {
-            if (Math.random() > 0.5) {
-                this.addEnemyRectangleHorizontal();
-            }
-        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
-
-        setInterval(() => {
-            if (Math.random() > 0.45) {
-                this.addEnemyRectangleVertical();
-            }
-        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
-
-        setInterval(() => {
-            if (Math.random() > 0.20) {
-                this.addEnemySquare();
-            }
-        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
-
-        setInterval(() => {
-            if (Math.random() > 0.20) {
-                this.addPowerupBulletTime();
-            }
-        }, 2 * 500);
-
-        setInterval( () => {
-            if (Math.random() > 0.15) {
-                this.addPowerupPlusScore();
-            }
-        }, 2 * 500);
+        }, ((4 * 525) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
             if (Math.random() > 0.25) {
-                this.addPowerupInvincibility();
+                this.addEnemyRectangleHorizontal();
             }
-        }, 2 * 500);
+        }, ((5 * 550) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
+            if (Math.random() > 0.25) {
+                this.addEnemyRectangleVertical();
+            }
+        }, ((6 * 625) / this.enemySpawnFrequencyMultiplier));
+
+        setInterval(() => {
+            if (Math.random() > 0.10) {
+                this.addEnemySquare();
+            }
+        }, ((4 * 330) / this.enemySpawnFrequencyMultiplier));
+
+        setInterval(() => {
+            if (Math.random() > 0.80) {
+                this.addPowerupBulletTime();
+            }
+        }, 33 * 510);
+
+        setInterval( () => {
             if (Math.random() > 0.5) {
+                this.addPowerupPlusScore();
+            }
+        }, 35 * 570);
+
+        setInterval(() => {
+            if (Math.random() > 0.90) {
+                this.addPowerupInvincibility();
+            }
+        }, 25 * 590);
+
+        setInterval(() => {
+            if (Math.random() > 0.25) {
                 this.addPowerupWipeout();
             }
-        }, 2 * 500);
+        }, 55 * 505);
 
     }
 
@@ -223,6 +223,9 @@ class Game {
         if (this.player[0].radius === 27) {
             this.player[0].explode();
             this.player[0].remove();
+            setTimeout(() => {
+                this.playing = false;
+            }, 1500);
         }
     }
 

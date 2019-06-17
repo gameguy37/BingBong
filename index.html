@@ -11,9 +11,15 @@
 <body background="assets/images/tron6.jpg">
     <div class="game">
         <div id="rules-and-canvas">
-            <section class="rules">Lorem Ipsum</section>
+            <canvas id="diagram"></canvas>
             <canvas id="canvas"></canvas>
-            <section class="rules">Lorem Ipsum</section>
+            <section id="rules">
+                <span>HOW TO PLAY</span>
+                <p>SEND THE WHITE BALL BACK AND FORTH BETWEEN SAFE ZONES WITH THE SPACE KEY TO SCORE POINTS</p>
+                <p>STAY STILL TOO LONG AND YOU'LL GROW IN SIZE UNTIL YOU EXPLODE (AND DIE)</p>
+                <p>AVOID ENEMIES AND GATHER POWERUPS</p>
+                <p>CHOOSE FROM A VARIETY OF GAME MODIFIERS TO INCREASE THE CHALLENGE AND MULTIPLY YOUR SCORE</p>
+            </section>
         </div>
         <div class="multipliers">
             <button class="multiplier-btn" id="faster-npcs">Faster Enemies & Powerups</button>
@@ -26,12 +32,6 @@
         <div>
             <button class="start-btn" id="start-game">START</button>
         </div>
-
-        <!-- <div class="high-scores">
-            <span>Highscore 1</span>
-            <span>Highscore 2</span>
-            <span>Highscore 3</span>
-        </div> -->
     </div>
     
     <div id="myModal" class="modal">
@@ -40,8 +40,6 @@
             <p>modal text</p>
         </div>
     </div>
-
-
 
 </body>
 </html>

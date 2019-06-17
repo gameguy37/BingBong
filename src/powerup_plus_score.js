@@ -28,7 +28,7 @@ class PowerupPlusScore extends Powerup {
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("+", this.pos[0], this.pos[1] + 1);
+        ctx.fillText("+", this.pos[0], this.pos[1]);
         ctx.closePath();
     }
     

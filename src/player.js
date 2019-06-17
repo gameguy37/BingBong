@@ -148,10 +148,6 @@ class Player extends MovingObject {
         return false;
     }
 
-    gameOver() {
-        alert("GAME OVER");
-    }
-
     draw(ctx) {
         ctx.beginPath();
         ctx.fillStyle = "#000000";

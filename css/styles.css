@@ -25,11 +25,35 @@ body {
 section {
   height: 610px;
   width: 200px;
-  background: white;
-  color: blue;
+  background: black;
+  color: rgba(204, 204, 204, 0.8);
+  text-align: left;
+  padding: 10px;
+  padding-top: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Saira Semi Condensed';
+  border: 5px solid #636e77;
+}
+
+span {
+  text-align: center;
+  font-size: 24px;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
 }
 
 #canvas {
+  border: 5px solid #636e77;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#diagram {
   border: 5px solid #636e77;
 }
 
