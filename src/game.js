@@ -14,7 +14,7 @@ const PowerupWipeout = require("./powerup_wipeout");
 const Particle = require("./particle");
 
 class Game {
-    constructor() {
+    constructor(npcSpeedMultiplierBool, angledEnemySpawnsBool, playerSpeedMultiplierBool, enemySpawnFrequencyMultiplierBool, enemySpeedRandomBool) {
         this.playing = true;
         this.enemies = [];
         this.powerups = [];
@@ -32,54 +32,29 @@ class Game {
 
         this.totalScoreMultiplier = 1;
 
-        document.getElementById('faster-npcs').onclick = () => {
-            if (this.npcSpeedMultiplier === 1) {
-                this.npcSpeedMultiplier = 1.5;
-                this.totalScoreMultiplier *= 1.5;
-            } else {
-                this.npcSpeedMultiplier = 1;
-                this.totalScoreMultiplier /= 1.5;
-            }
+        if (npcSpeedMultiplierBool === true) {
+            this.npcSpeedMultiplier = 1.5;
+            this.totalScoreMultiplier *= 1.5;
+        }
+        
+        if (angledEnemySpawnsBool === true) {
+            this.angledEnemySpawns = true;
+            this.totalScoreMultiplier *= 2;
+        }
+        
+        if (playerSpeedMultiplierBool === true) {
+            this.playerSpeedMultiplier = 0.75;
+            this.totalScoreMultiplier *= 1.2;
         }
 
-        document.getElementById('angled-enemy-spawns').onclick = () => {
-            if (this.angledEnemySpawns === false) {
-                this.angledEnemySpawns = true;
-                this.totalScoreMultiplier *= 2;
-            } else {
-                this.angledEnemySpawns = false;
-                this.totalScoreMultiplier /= 2;
-            }
+        if (enemySpawnFrequencyMultiplierBool === true) {
+            this.enemySpawnFrequencyMultiplier = 1.5;
+            this.totalScoreMultiplier *= 1.5;
         }
 
-        document.getElementById('slow-player').onclick = () => {
-            if (this.playerSpeedMultiplier === 1) {
-                this.playerSpeedMultiplier = 0.75;
-                this.totalScoreMultiplier *= 1.2;
-            } else {
-                this.playerSpeedMultiplier = 1;
-                this.totalScoreMultiplier /= 1.2;
-            }
-        }
-
-        document.getElementById('more-enemies').onclick = () => {
-            if (this.enemySpawnFrequencyMultiplier === 1) {
-                this.enemySpawnFrequencyMultiplier = 1.5;
-                this.totalScoreMultiplier *= 1.5;
-            } else {
-                this.enemySpawnFrequencyMultiplier = 1;
-                this.totalScoreMultiplier /= 1.5;
-            }
-        }
-
-        document.getElementById('random-enemy-speed').onclick = () => {
-            if (this.enemySpeedRandom === false) {
-                this.enemySpeedRandom = true;
-                this.totalScoreMultiplier *= 1.5;
-            } else {
-                this.enemySpeedRandom = false;
-                this.totalScoreMultiplier /= 1.5;
-            }
+        if (enemySpeedRandomBool === true) {
+            this.enemySpeedRandom = true;
+            this.totalScoreMultiplier *= 1.5;
         }
 
         this.addNPCs();

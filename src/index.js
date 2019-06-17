@@ -1,6 +1,12 @@
 const Game = require("./game");
 const GameView = require("./game_view");
 
+let npcSpeedMultiplierBool = false;
+let angledEnemySpawnsBool = false;
+let playerSpeedMultiplierBool = false;
+let enemySpawnFrequencyMultiplierBool = false;
+let enemySpeedRandomBool = false;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     ////////// DIAGRAM
@@ -89,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "rgba(204, 204, 204, 1)";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
+    ctxDiagram.shadowBlur = 0;
     ctxDiagram.fillText("POWERUPS", 100, 405);
     ctxDiagram.closePath();
 
@@ -100,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.shadowBlur = 30;
     ctxDiagram.shadowOffsetX = 0;
     ctxDiagram.shadowOffsetY = 0;
-    ctxDiagram.arc(40, 450, 12, 0, 2 * Math.PI, true);
+    ctxDiagram.arc(35, 450, 12, 0, 2 * Math.PI, true);
     ctxDiagram.stroke();
     ctxDiagram.fill();
     ctxDiagram.closePath();
@@ -109,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "white";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
-    ctxDiagram.fillText('S', 40, 452);
+    ctxDiagram.fillText('S', 35, 452);
     ctxDiagram.closePath();
 
     ctxDiagram.beginPath();
@@ -117,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "rgba(204, 204, 204, 0.75)";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
+    ctxDiagram.shadowBlur = 0;
     ctxDiagram.fillText("SLOW TIME", 125, 450);
     ctxDiagram.closePath();
 
@@ -128,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.shadowBlur = 30;
     ctxDiagram.shadowOffsetX = 0;
     ctxDiagram.shadowOffsetY = 0;
-    ctxDiagram.arc(40, 485, 12, 0, 2 * Math.PI, true);
+    ctxDiagram.arc(35, 485, 12, 0, 2 * Math.PI, true);
     ctxDiagram.stroke();
     ctxDiagram.fill();
     ctxDiagram.closePath();
@@ -137,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "white";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
-    ctxDiagram.fillText('!', 40, 487);
+    ctxDiagram.fillText('!', 35, 487);
     ctxDiagram.closePath();
 
     ctxDiagram.beginPath();
@@ -145,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "rgba(204, 204, 204, 0.75)";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
+    ctxDiagram.shadowBlur = 0;
     ctxDiagram.fillText("INVINCIBLE", 125, 485);
     ctxDiagram.closePath();
 
@@ -156,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.shadowBlur = 30;
     ctxDiagram.shadowOffsetX = 0;
     ctxDiagram.shadowOffsetY = 0;
-    ctxDiagram.arc(40, 520, 12, 0, 2 * Math.PI, true);
+    ctxDiagram.arc(35, 520, 12, 0, 2 * Math.PI, true);
     ctxDiagram.stroke();
     ctxDiagram.fill();
     ctxDiagram.closePath();
@@ -165,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "white";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
-    ctxDiagram.fillText('+', 40, 520);
+    ctxDiagram.fillText('+', 35, 520);
     ctxDiagram.closePath();
 
     ctxDiagram.beginPath();
@@ -173,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "rgba(204, 204, 204, 0.75)";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
+    ctxDiagram.shadowBlur = 0;
     ctxDiagram.fillText("SCORE PLUS", 125, 520);
     ctxDiagram.closePath();
 
@@ -184,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.shadowBlur = 30;
     ctxDiagram.shadowOffsetX = 0;
     ctxDiagram.shadowOffsetY = 0;
-    ctxDiagram.arc(40, 555, 12, 0, 2 * Math.PI, true);
+    ctxDiagram.arc(35, 555, 12, 0, 2 * Math.PI, true);
     ctxDiagram.stroke();
     ctxDiagram.fill();
     ctxDiagram.closePath();
@@ -193,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "white";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
-    ctxDiagram.fillText('X', 40, 557);
+    ctxDiagram.fillText('X', 35, 557);
     ctxDiagram.closePath();
 
     ctxDiagram.beginPath();
@@ -201,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctxDiagram.fillStyle = "rgba(204, 204, 204, 0.75)";
     ctxDiagram.textAlign = "center";
     ctxDiagram.textBaseline = "middle";
+    ctxDiagram.shadowBlur = 0;
     ctxDiagram.fillText("CLEAR SCREEN", 125, 555);
     ctxDiagram.closePath();
     
@@ -227,9 +238,70 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
     ctx.closePath();
 
-    document.getElementById('start-game').onclick = () => {
-        const game = new Game();
+    /////////////
+    let fasterNPCs = document.getElementById('faster-npcs');
+    fasterNPCs.onclick = () => {
+        if (npcSpeedMultiplierBool === false) {
+            npcSpeedMultiplierBool = true;
+            fasterNPCs.setAttribute("class", "multiplier-btn-active");
+            
+        } else {
+            npcSpeedMultiplierBool = false;
+            fasterNPCs.setAttribute("class", "multiplier-btn");
+        }
+    }
+
+    let angledEnemySpawns = document.getElementById('angled-enemy-spawns');
+    angledEnemySpawns.onclick = () => {
+        if (angledEnemySpawnsBool === false) {
+            angledEnemySpawnsBool = true;
+            angledEnemySpawns.setAttribute("class", "multiplier-btn-active");
+        } else {
+            angledEnemySpawnsBool = false;
+            angledEnemySpawns.setAttribute("class", "multiplier-btn");
+        }
+    }
+
+    let playerSpeedMultiplier = document.getElementById('slow-player');
+    playerSpeedMultiplier.onclick = () => {
+        if (playerSpeedMultiplierBool === false) {
+            playerSpeedMultiplierBool = true;
+            playerSpeedMultiplier.setAttribute("class", "multiplier-btn-active");
+        } else {
+            playerSpeedMultiplierBool = false;
+            playerSpeedMultiplier.setAttribute("class", "multiplier-btn");
+        }
+    }
+
+    let enemySpawnFrequencyMultiplier = document.getElementById('more-enemies');
+    enemySpawnFrequencyMultiplier.onclick = () => {
+        if (enemySpawnFrequencyMultiplierBool === false) {
+            enemySpawnFrequencyMultiplierBool = true;
+            enemySpawnFrequencyMultiplier.setAttribute("class", "multiplier-btn-active");
+        } else {
+            enemySpawnFrequencyMultiplierBool = false;
+            enemySpawnFrequencyMultiplier.setAttribute("class", "multiplier-btn");
+        }
+    }
+
+    let enemySpeedRandom = document.getElementById('random-enemy-speed');
+    enemySpeedRandom.onclick = () => {
+        if (enemySpeedRandomBool === false) {
+            enemySpeedRandomBool = true;
+            enemySpeedRandom.setAttribute("class", "multiplier-btn-active");
+        } else {
+            enemySpeedRandomBool = false;
+            enemySpeedRandom.setAttribute("class", "multiplier-btn");
+        }
+    }
+
+    /////////////
+    let startGame = document.getElementById('start-game');
+    startGame.onclick = () => {
+        const game = new Game(npcSpeedMultiplierBool, angledEnemySpawnsBool, playerSpeedMultiplierBool, enemySpawnFrequencyMultiplierBool, enemySpeedRandomBool);
         new GameView(game, ctx).start();
+        startGame.blur();
+
     }
 });
 
