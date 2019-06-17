@@ -6,7 +6,33 @@
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script type="application/javascript" src="./src/bundle.js"></script>
         <script type="application/javascript" src="./vendor/keymaster.js"></script>
-        
+        <script>
+            if (localStorage.getItem('hs1')) {
+                window.hs1 = localStorage.getItem('hs1');
+            } else {
+                window.hs1 = 0;
+            }
+            if (localStorage.getItem('hs2')) {
+                window.hs2 = localStorage.getItem('hs2');
+            } else {
+                window.hs2 = 0;
+            }
+            if (localStorage.getItem('hs3')) {
+                window.hs3 = localStorage.getItem('hs3');
+            } else {
+                window.hs3 = 0;
+            }
+            if (localStorage.getItem('hs4')) {
+                window.hs4 = localStorage.getItem('hs4');
+            } else {
+                window.hs4 = 0;
+            }
+            if (localStorage.getItem('hs5')) {
+                window.hs5 = localStorage.getItem('hs5');
+            } else {
+                window.hs5 = 0;
+            }
+        </script>
     </head>
 <body background="assets/images/tron6.jpg">
     <div id="title">
@@ -19,23 +45,38 @@
             <canvas id="canvas"></canvas>
             <section id="rules">
                 <span>HOW TO PLAY</span>
-                <p>SEND THE WHITE BALL BACK AND FORTH BETWEEN SAFE ZONES WITH THE SPACE KEY TO SCORE POINTS</p>
+                <p>SEND THE WHITE BALL BACK AND FORTH BETWEEN SAFE ZONES WITH THE "SPACE" KEY TO SCORE POINTS</p>
                 <p>STAY STILL TOO LONG AND YOU'LL GROW IN SIZE UNTIL YOU EXPLODE (AND DIE)</p>
                 <p>AVOID ENEMIES AND GATHER POWERUPS</p>
                 <p>CHOOSE FROM A VARIETY OF GAME MODIFIERS TO INCREASE THE CHALLENGE AND MULTIPLY YOUR SCORE</p>
             </section>
         </div>
-        <div class="multipliers">
-            <button class="multiplier-btn" id="faster-npcs">Faster Enemies & Powerups (Score x1.5)</button>
-            <button class="multiplier-btn" id="angled-enemy-spawns">Angled Enemy Trajectories (Score x2)</button>
-            <button class="multiplier-btn" id="slow-player">Slow Player (Score x1.2)</button>
-            <button class="multiplier-btn" id="more-enemies">More Enemies (Score x1.5)</button>
-            <button class="multiplier-btn" id="random-enemy-speed">Random Enemy Speed (Score x1.5)</button>
-            <!-- <button class="multiplier-btn-beast" id="beast-mode">BEAST MODE!!!</button> -->
+        <div id="bottom">
+            <article id="links">
+                github goes here
+            </article>
+
+            <div id="bottom-btns">
+                <div class="multipliers">
+                    <button class="multiplier-btn" id="faster-npcs">Faster Enemies & Powerups (Score x1.5)</button>
+                    <button class="multiplier-btn" id="angled-enemy-spawns">Angled Enemy Trajectories (Score x2)</button>
+                    <button class="multiplier-btn" id="slow-player">Slow Player (Score x1.2)</button>
+                    <button class="multiplier-btn" id="more-enemies">More Enemies (Score x1.5)</button>
+                    <button class="multiplier-btn" id="random-enemy-speed">Random Enemy Speed (Score x1.5)</button>
+                    <!-- <button class="multiplier-btn-beast" id="beast-mode">BEAST MODE!!!</button> -->
+                </div>
+                <div>
+                    <button class="start-btn" id="start-game">START</button>
+                </div>
+            </div>
+
+            <article id="scoreboard">
+                <span>ALL TIME</span>
+                <span>HIGH SCORES</span>
+                <ol id="high-scores"></ol>
+            </article>
         </div>
-        <div>
-            <button class="start-btn" id="start-game">START</button>
-        </div>
+            
     </div>
 
 </body>

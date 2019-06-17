@@ -50,7 +50,7 @@ body {
 
 section {
   height: 610px;
-  width: 200px;
+  width: 210px;
   background: black;
   color: rgba(204, 204, 204, 0.8);
   text-align: left;
@@ -63,14 +63,34 @@ section {
   border: 5px solid #636e77;
 }
 
-span {
+article {
+  height: 210px;
+  width: 210px;
+  background: black;
+  color: rgba(204, 204, 204, 0.8);
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Saira Semi Condensed';
+  border: 5px solid #636e77;
+}
+
+section span {
   text-align: center;
   font-size: 24px;
 }
 
+article span {
+  text-align: center;
+  font-size: 18px;
+}
+
 p {
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
+  margin-top: 35px;
 }
 
 #canvas {
@@ -83,7 +103,24 @@ p {
   border: 5px solid #636e77;
 }
 
-.multipliers{
+#bottom {
+  display: flex;
+  width: 1490px;
+  justify-content: space-between;
+}
+
+#links,
+#scoreboard {
+  margin-top: 15px;
+  text-align: left;
+}
+
+#high-scores {
+  margin-top: 0;
+  margin-left: -15px;
+}
+
+.multipliers {
   width: 1010px;
   display: flex;
   justify-content: space-around;
@@ -141,15 +178,15 @@ p {
 } */
 
 .start-btn {
-  padding: 20px;
-  width: 350px;
+  padding: 25px;
+  width: 450px;
   margin-top: 15px;
   border: 5px solid white;
   color: #333333;
   background-color: #4cedff;
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 /* .high-scores {

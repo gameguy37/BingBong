@@ -71,6 +71,7 @@ class Player extends MovingObject {
             this.game.enemies = [];
             setTimeout( () => {
                 this.game.playing = false;
+                this.game.updateHighScores(this.game.score);
             }, 1500);
             return true;
         }

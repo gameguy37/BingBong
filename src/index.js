@@ -8,7 +8,7 @@ let enemySpawnFrequencyMultiplierBool = false;
 let enemySpeedRandomBool = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    
     ////////// DIAGRAM
     const canvasDiagram = document.getElementById('diagram');
     canvasDiagram.width = 200;
@@ -296,6 +296,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /////////////
+    
+    let hs1 = window.hs1;
+    let hs2 = window.hs2;
+    let hs3 = window.hs3;
+    let hs4 = window.hs4;
+    let hs5 = window.hs5;
+
+    let highScores = document.getElementById('high-scores');
+    highScores.innerHTML = `<li>${hs1}</li><li>${hs2}</li><li>${hs3}</li><li>${hs4}</li><li>${hs5}</li>`;
+
+    /////////////
+
     let startGame = document.getElementById('start-game');
     startGame.onclick = () => {
         const game = new Game(npcSpeedMultiplierBool, angledEnemySpawnsBool, playerSpeedMultiplierBool, enemySpawnFrequencyMultiplierBool, enemySpeedRandomBool);

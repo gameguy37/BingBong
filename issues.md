@@ -1,6 +1,6 @@
 fonts don't load before diagram render
 powerups need timer countdown visual
-high score board
+high score board needs ability to enter initials
 sound
 
 collision for rotating objects

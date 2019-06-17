@@ -200,6 +200,7 @@ class Game {
             this.player[0].remove();
             setTimeout(() => {
                 this.playing = false;
+                this.updateHighScores(this.score);
             }, 1500);
         }
     }
@@ -445,6 +446,41 @@ class Game {
             this.player[0].attemptCatch();
             this.checkRadius();
         }
+    }
+
+    updateHighScores(score) {
+        let hs1 = localStorage.getItem('hs1');
+        let hs2 = localStorage.getItem('hs2');
+        let hs3 = localStorage.getItem('hs3');
+        let hs4 = localStorage.getItem('hs4');
+        let hs5 = localStorage.getItem('hs5');
+
+        let scores = [];
+        scores.push(hs1);
+        scores.push(hs2);
+        scores.push(hs3);
+        scores.push(hs4);
+        scores.push(hs5);
+        scores.push(score.toString());
+        debugger
+        let orderedScores = scores.sort(function(a,b){return a - b}).reverse();
+        scores = [];
+        debugger
+        hs1 = orderedScores[0];
+        hs2 = orderedScores[1];
+        hs3 = orderedScores[2];
+        hs4 = orderedScores[3];
+        hs5 = orderedScores[4];
+        debugger
+        
+        localStorage.setItem('hs5', hs5);
+        localStorage.setItem('hs4', hs4);
+        localStorage.setItem('hs3', hs3);
+        localStorage.setItem('hs2', hs2);
+        localStorage.setItem('hs1', hs1);
+
+        let highScores = document.getElementById('high-scores');
+        highScores.innerHTML = `<li>${hs1}</li><li>${hs2}</li><li>${hs3}</li><li>${hs4}</li><li>${hs5}</li>`;
     }
 
 }
