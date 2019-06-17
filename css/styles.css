@@ -92,6 +92,8 @@ p {
 
 .multiplier-btn {
   padding: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   width: 150px;
   border: 5px solid #4cedff;
   color: #333333;
@@ -103,6 +105,8 @@ p {
 
 .multiplier-btn-active {
   padding: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   width: 150px;
   border: 5px solid white;
   color: #333333;
