@@ -225,11 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.shadowOffsetY = 0;
     ctx.fillRect((Game.DIM_X * 0.49), 0, (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
     ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
-    ctx.font = "160px Saira Semi Condensed";
-    ctx.fillStyle = "rgba(204, 204, 204, 0.2)";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("BING BONG", 500, 320);
     ctx.closePath();
 
     document.getElementById('start-game').onclick = () => {

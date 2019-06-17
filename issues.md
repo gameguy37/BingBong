@@ -1,6 +1,4 @@
-no startup screen
-no game over screen or notification
-rules
+fonts don't load before diagram render
 powerups need timer countdown visual
 high score board
 sound
