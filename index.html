@@ -32,9 +32,19 @@
             } else {
                 window.hs5 = 0;
             }
+
+            let mute = () => {
+                if (document.getElementById('music').muted == false) {
+                    document.getElementById('music').muted = true;
+                    document.getElementById('music').blur();
+                } else {
+                    document.getElementById('music').muted = false;
+                    document.getElementById('music').blur();
+                }
+            }
         </script>
         <iframe src="assets/audio/2-seconds-of-silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
-        <audio id="player" autoplay loop>
+        <audio id="music" autoplay loop>
             <source src="assets/audio/09 Bouncing Around the Room.mp3" type="audio/mp3">
         </audio>
     </head>
@@ -57,7 +67,8 @@
         </div>
         <div id="bottom">
             <article id="links">
-                github goes here
+                <div id="github-link"><a href="https://github.com/gameguy37"><img src="assets/images/github.png" height="30px" width="30px"/><span>GitHub</span></a></div>
+                <button id="mute-btn" onclick="mute()">Music On/Off</button>
             </article>
 
             <div id="bottom-btns">

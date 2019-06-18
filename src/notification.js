@@ -3,7 +3,7 @@ const MovingObject = require("./moving_object");
 class Notification extends MovingObject {
     constructor(options) {
         options.pos = options.pos;
-        options.vel = [0.5, -0.5];
+        options.vel = options.vel || [0.5, -0.5];
         options.color = "#FFFFFF";
         super(options);
         this.message = options.message;

@@ -63,6 +63,11 @@ section {
   border: 5px solid #636e77;
 }
 
+section span {
+  text-align: center;
+  font-size: 24px;
+}
+
 article {
   height: 210px;
   width: 210px;
@@ -73,18 +78,50 @@ article {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   font-family: 'Saira Semi Condensed';
   border: 5px solid #636e77;
 }
 
-section span {
-  text-align: center;
-  font-size: 24px;
+#links {
+  align-items: center;
 }
 
 article span {
   text-align: center;
   font-size: 18px;
+}
+
+#github-link img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+#github-link a {
+  text-decoration: none;
+  color: rgba(204, 204, 204, 0.8);
+}
+
+#github-link span {
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+#mute-btn {
+  padding: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 150px;
+  border: 5px solid white;
+  color: #333333;
+  background-color: #4cedff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#mute-btn:focus {
+  outline: 0;
 }
 
 p {

@@ -23,6 +23,7 @@ class Game {
         this.notifications = [];
         this.score = 0;
         this.ripple = 0;
+        this.highScoreSet = false;
 
         this.npcSpeedMultiplier = 1;
         this.angledEnemySpawns = false;
@@ -97,55 +98,55 @@ class Game {
             if (Math.random() > 0.10) {
                 this.addEnemyCircle();
             }
-        }, ((2 * 500) / this.enemySpawnFrequencyMultiplier));
+        }, ((2 * 520) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
             if (Math.random() > 0.35) {
                 this.addEnemyLine();
             }
-        }, ((4 * 525) / this.enemySpawnFrequencyMultiplier));
+        }, ((4 * 535) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
-            if (Math.random() > 0.25) {
+            if (Math.random() > 0.15) {
                 this.addEnemyRectangleHorizontal();
             }
-        }, ((5 * 550) / this.enemySpawnFrequencyMultiplier));
+        }, ((5 * 515) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
-            if (Math.random() > 0.25) {
+            if (Math.random() > 0.20) {
                 this.addEnemyRectangleVertical();
             }
-        }, ((6 * 625) / this.enemySpawnFrequencyMultiplier));
+        }, ((6 * 465) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
-            if (Math.random() > 0.10) {
+            if (Math.random() > 0.20) {
                 this.addEnemySquare();
             }
-        }, ((4 * 330) / this.enemySpawnFrequencyMultiplier));
+        }, ((4 * 310) / this.enemySpawnFrequencyMultiplier));
 
         setInterval(() => {
             if (Math.random() > 0.80) {
                 this.addPowerupBulletTime();
             }
-        }, 33 * 510);
+        }, 23 * 510);
 
         setInterval( () => {
             if (Math.random() > 0.5) {
                 this.addPowerupPlusScore();
             }
-        }, 35 * 570);
+        }, 28 * 535);
 
         setInterval(() => {
-            if (Math.random() > 0.90) {
+            if (Math.random() > 0.70) {
                 this.addPowerupInvincibility();
             }
-        }, 25 * 590);
+        }, 25 * 585);
 
         setInterval(() => {
-            if (Math.random() > 0.25) {
+            if (Math.random() > 0.35) {
                 this.addPowerupWipeout();
             }
-        }, 55 * 505);
+        }, 30 * 505);
 
     }
 
