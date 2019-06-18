@@ -126,8 +126,8 @@ article span {
 
 p {
   text-align: center;
-  font-size: 15px;
-  margin-top: 35px;
+  font-size: 14px;
+  margin-top: 13px;
 }
 
 #canvas {
@@ -224,6 +224,7 @@ p {
   border-radius: 15px;
   cursor: pointer;
   font-size: 24px;
+  outline: 0;
 }
 
 /* .high-scores {
