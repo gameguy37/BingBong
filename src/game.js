@@ -134,7 +134,7 @@ class Game {
             if (Math.random() > 0.5) {
                 this.addPowerupPlusScore();
             }
-        }, 28 * 535);
+        }, 26 * 535);
 
         setInterval(() => {
             if (Math.random() > 0.70) {
@@ -146,7 +146,7 @@ class Game {
             if (Math.random() > 0.35) {
                 this.addPowerupWipeout();
             }
-        }, 30 * 505);
+        }, 29 * 465);
 
     }
 
@@ -190,6 +190,20 @@ class Game {
                 if (player.isCollidedWith(npc)) {
                     const collision = player.collideWith(npc);
                     if (collision) return;
+                }
+            }
+        }
+    }
+
+    checkNearMisses() {
+        if (this.player.length !== 0) {
+            const player = this.player[0];
+            const allNPCs = this.allNPCs();
+            for (let i = 0; i < allNPCs.length; i++) {
+                const npc = allNPCs[i];
+                if (player.hasNearlyMissed(npc)) {
+                    const nearMiss = player.nearlyMiss(npc);
+                    if (nearMiss) return;
                 }
             }
         }
@@ -443,6 +457,7 @@ class Game {
     step(delta) {
         this.moveObjects(delta);
         this.checkCollisions();
+        this.checkNearMisses();
         if (this.player.length !== 0) {
             this.player[0].attemptCatch();
             this.checkRadius();

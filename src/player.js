@@ -44,11 +44,13 @@ class Player extends MovingObject {
             this.pos = [500, 570];
             this.safe_bottom = true;
             this.game.score += 10 * this.game.totalScoreMultiplier;
+
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
             } else {
                 hs1 = 0;
             }
+
             if (this.game.score > hs1 && this.game.highScoreSet === false) {
                 this.game.highScoreSet = true;
                 this.game.notifications.push(new Notification({
@@ -57,20 +59,23 @@ class Player extends MovingObject {
                     vel: [0, -0.25],
                     game: this.game,
                 }));
+                setTimeout(() => {
+                    this.game.notifications = [];
+                }, 750);
             }
-            setTimeout(() => {
-                this.game.notifications = [];
-            }, 750);
+            
         } else if (this.vulnerable() && this.pos[1] <= 30) {
             this.vel = [0, 0];
             this.pos = [500, 30];
             this.safe_top = true;
             this.game.score += 10 * this.game.totalScoreMultiplier;
+
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
             } else {
                 hs1 = 0;
             }
+
             if (this.game.score > hs1 && this.game.highScoreSet === false) {
                 this.game.highScoreSet = true;
                 this.game.notifications.push(new Notification({
@@ -79,10 +84,11 @@ class Player extends MovingObject {
                     vel: [0, -0.25],
                     game: this.game,
                 }));
+                setTimeout(() => {
+                    this.game.notifications = [];
+                }, 750);
             }
-            setTimeout(() => {
-                this.game.notifications = [];
-            }, 750);
+
         } else {
             return;
         }
@@ -115,11 +121,13 @@ class Player extends MovingObject {
             otherObject.remove();
             otherObject.explode();
             this.game.score += 10 * this.game.totalScoreMultiplier;
+
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
             } else {
                 hs1 = 0;
             }
+
             if (this.game.score > hs1 && this.game.highScoreSet === false) {
                 this.game.highScoreSet = true;
                 this.game.notifications.push(new Notification({
@@ -128,10 +136,11 @@ class Player extends MovingObject {
                     vel: [0, -0.25],
                     game: this.game,
                 }));
+                setTimeout(() => {
+                    this.game.notifications = [];
+                }, 750);
             }
-            setTimeout(() => {
-                this.game.notifications = [];
-            }, 750);
+            
             return true;
         }
 
@@ -182,11 +191,13 @@ class Player extends MovingObject {
 
         if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
             this.game.score += 10 * this.game.totalScoreMultiplier;
+
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
             } else {
                 hs1 = 0;
             }
+
             if (this.game.score > hs1 && this.game.highScoreSet === false) {
                 this.game.highScoreSet = true;
                 this.game.notifications.push(new Notification({
@@ -195,10 +206,11 @@ class Player extends MovingObject {
                     vel: [0, -0.25],
                     game: this.game,
                 }));
+                setTimeout(() => {
+                    this.game.notifications = [];
+                }, 750);
             }
-            setTimeout(() => {
-                this.game.notifications = [];
-            }, 750);
+            
             otherObject.remove();
             otherObject.explode();
             return true;
@@ -208,6 +220,42 @@ class Player extends MovingObject {
             otherObject.remove();
             otherObject.explode();
             this.game.score += 10 * this.game.totalScoreMultiplier * this.game.enemies.length;
+
+            if (localStorage.getItem('hs1')) {
+                hs1 = localStorage.getItem('hs1');
+            } else {
+                hs1 = 0;
+            }
+
+            if (this.game.score > hs1 && this.game.highScoreSet === false) {
+                this.game.highScoreSet = true;
+                this.game.notifications.push(new Notification({
+                    message: "NEW HIGH SCORE!!!",
+                    pos: [500, 200],
+                    vel: [0, -0.25],
+                    game: this.game,
+                }));
+                setTimeout(() => {
+                    this.game.notifications = [];
+                }, 750);
+            }
+            
+            this.game.enemies.forEach(enemy => {
+                enemy.explode();
+            })
+            
+            this.game.enemies = [];
+            return true;
+        }
+        
+        return false;
+    }
+
+    nearlyMiss(otherObject) {
+        if (this.vulnerable() === true) {
+            otherObject.remove();
+            otherObject.explode();
+            this.game.score += 10 * this.game.totalScoreMultiplier;
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
             } else {
@@ -224,15 +272,9 @@ class Player extends MovingObject {
             }
             setTimeout(() => {
                 this.game.notifications = [];
-            }, 750);
-            this.game.enemies.forEach(enemy => {
-                enemy.explode();
-            })
-            this.game.enemies = [];
+            }, 1000);
             return true;
         }
-        
-        return false;
     }
 
     draw(ctx) {
