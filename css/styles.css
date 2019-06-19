@@ -1,9 +1,16 @@
+@font-face {
+  font-family: 'Saira Semi Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Saira Semi Condensed'),
+       url(../assets/fonts/SairaSemiCondensed-Regular.ttf) format('truetype');
+}
+
 #title {
   display: flex;
   justify-content: space-between;
   width: 1000px;
   margin: 0 auto;
-
 }
 
 h1 {
