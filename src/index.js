@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillRect((Game.DIM_X * 0.49), (Game.DIM_Y * 0.95), (Game.DIM_X * 0.02), (Game.DIM_Y * 0.05));
     ctx.closePath();
 
-    /////////////
-
     let fasterNPCs = document.getElementById('faster-npcs');
     fasterNPCs.onclick = () => {
         if (npcSpeedMultiplierBool === false) {
@@ -92,8 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         enemySpeedRandom.blur();
     }
-
-    /////////////
     
     let hs1 = window.hs1;
     let hs2 = window.hs2;
@@ -103,8 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let highScores = document.getElementById('high-scores');
     highScores.innerHTML = `<li>${hs1}</li><li>${hs2}</li><li>${hs3}</li><li>${hs4}</li><li>${hs5}</li>`;
-
-    /////////////
 
     let startGame = document.getElementById('start-game');
     startGame.onclick = () => {
@@ -323,6 +317,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.fonts.load('10pt "Saira Semi Condensed"').then(renderDiagram);
 
 });
-
-
-
