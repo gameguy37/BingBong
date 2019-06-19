@@ -1,8 +1,7 @@
 fonts don't load before diagram render
 powerups need timer countdown visual
-
 collision for rotating objects
-near miss mechanic
+near miss mechanic still wonky
 
 font awesome icons
 random particle colors
