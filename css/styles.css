@@ -103,13 +103,19 @@ article span {
   margin-bottom: 1px;
 }
 
+#angellist-link img {
+  vertical-align: middle;
+}
+
 #github-link a,
-#linkedin-link a {
+#linkedin-link a,
+#angellist-link a {
   text-decoration: none;
   color: rgba(204, 204, 204, 0.8);
 }
 
-#github-link span {
+#github-link span,
+#angellist-link span {
   line-height: 30px;
   vertical-align: middle;
 }
