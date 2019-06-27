@@ -47,17 +47,32 @@ class MovingObject {
 
     hasNearlyMissed(otherObject) {
         if (otherObject.constructor.name === "EnemyCircle") {
-            if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && (this.pos[1] < otherObject.pos[1]) && (this.vel[1] < 0) && (this.pos[0] < otherObject.pos[0])) {
-                return true;
-            }
-            if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && (this.pos[1] > otherObject.pos[1]) && (this.vel[1] > 0) && (this.pos[0] > otherObject.pos[0])) {
-                return true;
-            }
-            if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 20)) && (this.pos[1] < otherObject.pos[1]) && (this.vel[1] < 0) && (this.pos[0] > otherObject.pos[0])) {
-                return true;
-            }
-            if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 20)) && (this.pos[1] > otherObject.pos[1]) && (this.vel[1] > 0) && (this.pos[0] < otherObject.pos[0])) {
-                return true;
+            if (otherObject.vel[0] < 0) { // enemy coming from the right, moving left
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] - otherObject.radius)) && (this.pos[0] < otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 25)) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] + otherObject.radius)) && (this.pos[0] > otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 25)) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] - otherObject.radius)) && (this.pos[0] > otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] + otherObject.radius)) && (this.pos[0] < otherObject.pos[0])) {
+                    return true;
+                }
+            } else {
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 25)) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] + otherObject.radius)) && (this.pos[0] < otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] - otherObject.radius)) && (this.pos[0] > otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 10)) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] + otherObject.radius)) && (this.pos[0] > otherObject.pos[0])) {
+                    return true;
+                }
+                if ((Util.dist(this.pos, otherObject.pos) < (this.radius + otherObject.radius + 25)) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] - otherObject.radius)) && (this.pos[0] < otherObject.pos[0])) {
+                    return true;
+                }
             }
         }
         if (otherObject.constructor.name === "EnemyLine" ||
@@ -66,18 +81,40 @@ class MovingObject {
             otherObject.constructor.name === "EnemySquare") {
             let DeltaX = this.pos[0] - Math.max(otherObject.pos[0] - (otherObject.width / 2), Math.min(this.pos[0], (otherObject.pos[0] + (otherObject.width / 2))));
             let DeltaY = this.pos[1] - Math.max(otherObject.pos[1] - (otherObject.length / 2), Math.min(this.pos[1], (otherObject.pos[1] + (otherObject.length / 2))));
-            debugger
-            if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 8) * (this.radius + 8)))) && (this.pos[1] < otherObject.pos[1]) && (this.vel[1] < 0) && (this.pos[0] < otherObject.pos[0])) {
-                return true;
-            }
-            if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 8) * (this.radius + 8)))) && (this.pos[1] > otherObject.pos[1]) && (this.vel[1] > 0) && (this.pos[0] > otherObject.pos[0])) {
-                return true;
-            }
-            if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 24) * (this.radius + 24)))) && (this.pos[1] < otherObject.pos[1]) && (this.vel[1] < 0) && (this.pos[0] > otherObject.pos[0])) {
-                return true;
-            }
-            if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 24) * (this.radius + 24)))) && (this.pos[1] > otherObject.pos[1]) && (this.vel[1] > 0) && (this.pos[0] < otherObject.pos[0])) {
-                return true;
+            if (otherObject.vel[0] < 0) { // enemy coming from the right, moving left
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 14) * (this.radius + 14)))) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] - (otherObject.length / 2))) && (this.pos[0] < otherObject.pos[0])) {
+                    // you're heading up, your bottom is above their top, they're on your right = FRONT EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 30) * (this.radius + 30)))) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] + (otherObject.length / 2))) && (this.pos[0] > otherObject.pos[0])) {
+                    // you're heading up, your bottom is above their bottom, they're on your left = BACK EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 30) * (this.radius + 30)))) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] - (otherObject.length / 2))) && (this.pos[0] > otherObject.pos[0])) {
+                    // you're heading down, your top is below their top, they're on your left = BACK EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 14) * (this.radius + 14)))) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] + (otherObject.length / 2))) && (this.pos[0] < otherObject.pos[0])) {
+                    // you're heading down, your top is below their bottom, they're on your right = FRONT EDGE NEAR MISS
+                    return true;
+                }
+            } else { // enemy coming from the left, moving right
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 30) * (this.radius + 30)))) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] + (otherObject.length / 2))) && (this.pos[0] < otherObject.pos[0])) {
+                    // you're heading up, your bottom is above their bottom, they're on your right = BACK EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 14) * (this.radius + 14)))) && ((this.vel[1] < 0) && (this.pos[1] + this.radius) < (otherObject.pos[1] - (otherObject.length / 2))) && (this.pos[0] > otherObject.pos[0])) {
+                    // you're heading up, your bottom is above their top, they're on your left = FRONT EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 14) * (this.radius + 14)))) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] + (otherObject.length / 2))) && (this.pos[0] > otherObject.pos[0])) {
+                    // you're heading down, your top is below their bottom, they're on your left = FRONT EDGE NEAR MISS
+                    return true;
+                }
+                if (((DeltaX * DeltaX + DeltaY * DeltaY) < (((this.radius + 30) * (this.radius + 30)))) && ((this.vel[1] > 0) && (this.pos[1] - this.radius) > (otherObject.pos[1] - (otherObject.length / 2))) && (this.pos[0] < otherObject.pos[0])) {
+                    // you're heading down, your top is below their top, they're on your right = BACK EDGE NEAR MISS
+                    return true;
+                }
             }
 
             ////// need to tinker with these values, since it works well for some elements and not so great for others
