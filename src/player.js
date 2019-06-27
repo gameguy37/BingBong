@@ -145,18 +145,18 @@ class Player extends MovingObject {
         }
 
         if (otherObject instanceof PowerupBulletTime && this.vulnerable() === true) {
-            this.game.npcSpeedMultiplier = 0.4;
-            let revert = (1 / this.game.npcSpeedMultiplier);
+            this.game.npcSpeedMultiplier2 = 0.4;
+            let revert = (1 / this.game.npcSpeedMultiplier2);
             this.game.enemies.forEach( enemy => {
-                enemy.vel[0] = enemy.vel[0] * this.game.npcSpeedMultiplier;
-                enemy.vel[1] = enemy.vel[1] * this.game.npcSpeedMultiplier;
+                enemy.vel[0] = enemy.vel[0] * this.game.npcSpeedMultiplier2;
+                enemy.vel[1] = enemy.vel[1] * this.game.npcSpeedMultiplier2;
             })
             this.game.powerups.forEach( powerup => {
-                powerup.vel[0] = powerup.vel[0] * this.game.npcSpeedMultiplier;
-                powerup.vel[1] = powerup.vel[1] * this.game.npcSpeedMultiplier;
+                powerup.vel[0] = powerup.vel[0] * this.game.npcSpeedMultiplier2;
+                powerup.vel[1] = powerup.vel[1] * this.game.npcSpeedMultiplier2;
             })
             setTimeout(() => {
-                this.game.npcSpeedMultiplier = 1;
+                this.game.npcSpeedMultiplier2 = 1;
                 this.game.enemies.forEach(enemy => {
                     enemy.vel[0] = enemy.vel[0] * revert;
                     enemy.vel[1] = enemy.vel[1] * revert;

@@ -8,19 +8,41 @@ class MovingObject {
         this.length = options.length;
         this.width = options.width;
         this.color = options.color;
-        if (this.game.angledEnemySpawns === true && !(this.constructor.name === "Player") && !(this.constructor.name === "Notification")) {
+        if (this.game.angledEnemySpawns === true &&
+            !(this.constructor.name === "Player" ||
+                this.constructor.name === "Notification" ||
+                this.constructor.name === "PowerupBulletTime" ||
+                this.constructor.name === "PowerupInvincibility" ||
+                this.constructor.name === "PowerupPlusScore" ||
+                this.constructor.name === "PowerupWipeout")) {
             let yVectorsArray = [1, 0.75, 0.5, 0.25, 0, -0.25, -0.5, -0.75, -1];
             let vectorY = yVectorsArray[Math.floor(Math.random() * yVectorsArray.length)];
             options.vel[1] += vectorY;
         }
-        if (this.game.enemySpeedRandom === true && !(this.constructor.name === "Player") && !(this.constructor.name === "Notification")) {
+        if (this.game.enemySpeedRandom === true &&
+            !(this.constructor.name === "Player" ||
+                this.constructor.name === "Notification" ||
+                this.constructor.name === "PowerupBulletTime" ||
+                this.constructor.name === "PowerupInvincibility" ||
+                this.constructor.name === "PowerupPlusScore" ||
+                this.constructor.name === "PowerupWipeout")) {
             let vectorsArray = [1.5, 1, 0.5, 0, -0.5, -1, -1.5];
             let vectorX = vectorsArray[Math.floor(Math.random() * vectorsArray.length)];
             let vectorY = vectorsArray[Math.floor(Math.random() * vectorsArray.length)];
             options.vel[0] += vectorX;
             options.vel[1] += vectorY;
         }
-        this.vel = [(options.vel[0] * this.game.npcSpeedMultiplier), (options.vel[1] * this.game.npcSpeedMultiplier)];
+
+        if (!(this.constructor.name === "Player" ||
+                this.constructor.name === "Notification" ||
+                this.constructor.name === "PowerupBulletTime" ||
+                this.constructor.name === "PowerupInvincibility" ||
+                this.constructor.name === "PowerupPlusScore" ||
+                this.constructor.name === "PowerupWipeout")) {
+            this.vel = [(options.vel[0] * this.game.npcSpeedMultiplier * this.game.npcSpeedMultiplier2), (options.vel[1] * this.game.npcSpeedMultiplier * this.game.npcSpeedMultiplier2)];
+        } else {
+            this.vel = [(options.vel[0] * this.game.npcSpeedMultiplier2), (options.vel[1] * this.game.npcSpeedMultiplier2)];
+        }
     }
 
     hasNearlyMissed(otherObject) {
