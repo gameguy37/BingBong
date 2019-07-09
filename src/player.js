@@ -190,7 +190,7 @@ class Player extends MovingObject {
         }
 
         if (otherObject instanceof PowerupPlusScore && this.vulnerable() === true) {
-            this.game.score += 10 * this.game.totalScoreMultiplier;
+            this.game.score += 20 * this.game.totalScoreMultiplier;
 
             if (localStorage.getItem('hs1')) {
                 hs1 = localStorage.getItem('hs1');
