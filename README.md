@@ -17,7 +17,7 @@ BingBong is a game designed to be easy to pick up and challenging to master. Any
 
 Once a player has chosen to launch their character from one side to the other, the velocity is constant until the safe zone on the opposite side is reached. The player chooses exactly when to launch their character from one safe zone to the other (top-to-bottom, bottom-to-top, ad infinitum) in order to avoid the gauntlet of enemies, which fly in from either side and move horizontally. Colliding with any enemy immediately ends the game.
 
-<img src="assets/images/wireframe.png" alt="wireframe"/>
+<img src="assets/images/BingBong.gif" alt="gameplay_gif"/>
 
 ## Mechanics
 
@@ -36,7 +36,7 @@ In addition to enemies, powerups will occasionally fly through the screen that c
 The player's score goes up by 10 points for each successful traversal of the field. However, there are also other ways to increase total score:
 * Some powerups can be helpful in increasing the player's score:
   * When the player is invincible, enemies can be destroyed by passing through them. Destroying an enemy grants 10 bonus points.
-  * Score++ is a powerup worth an immediate 20 points to the player's score.
+  * Score Plus is a powerup worth an immediate 20 points to the player's score.
 * Near Misses - if a player is skillful enough to send their character across the gauntlet and come extremely close to an enemy without actually hitting it, the enemy will be destroyed and player score will be incremented by 10 additional points.
 * Score Multipliers - Before starting the game, the player will have the choice to select from multiple score modifiers. Each of these make the game harder in some way and have associated score multipliers (x1.2, x1.25, x1.5). Some of these modifiers are listed below:
   * Faster Enemies
